@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="ico/favicon.ico">
+
+    <title>BLR-Cafe</title>
+
+    <!-- Bootstrap core CSS -->
+<link href="css/bootstrap.css" rel="stylesheet">
+
+    <!-- Just for debugging purposes. Don't actually copy this line! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+	{% load staticfiles %}
+    <!-- Custom styles for this template -->
+    <link href="{% static 'Cafe/css/bootstrap.css' %}" rel="stylesheet">
+  </head>
+  <body>
+  <!-- NAVBAR
+================================================== -->
+  <div class="navbar-wrapper" style="background-color:whitesmoke">
+      <div class="container">
+
+          <div class="navbar navbar-static-top" role="navigation" style="margin-bottom:0px">
+
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <img class="navbar-brand"   style="height: 51px;width: 124px;padding-bottom: 5px;padding-top: 5px" src="{% static 'Cafe/img/ugam_logo.png' %}" href="www.ugamsolutions.com"></img>
+            </div>
+            <div class="navbar-collapse collapse">
+              <ul class="nav navbar-nav pull-right">
+          <li class="divider-vertical"></li>
+          <li class="dropdown">
+            <a class="dropdown-toggle" href="#" data-toggle="dropdown">Sign In <strong class="caret"></strong></a>
+            <div class="dropdown-menu" style="padding: 15px; padding-bottom: 0px;">
+			<!-- Login form here -->
+			<form action="[YOUR ACTION]" method="post" accept-charset="UTF-8">
+	<label>Username:</label>		
+  <input id="user_username" style="margin-bottom: 15px;" type="text" name="user[username]" size="30" />
+  <label>Password:</label>
+  <input id="user_password" style="margin-bottom: 15px;" type="password" name="user[password]" size="30" />
+  <input id="user_remember_me" style="float: left; margin-right: 10px;" type="checkbox" name="user[remember_me]" value="1" />
+  <label class="string optional" for="user_remember_me"> Remember me</label>
+ 
+  <input class="btn btn-primary" style="clear: left; width: 100%; height: 32px; font-size: 13px;" type="submit" name="commit" value="Sign In" />
+  
+</form>
+<br/>
+			</div>
+			<li style="position:relative; left:-10px"><a href="/users/sign_up">Sign Up</a></li>
+              
+			  
+            
+          </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+	<!-- Modal window html form -->
+ 
+	
+   <!--  Carousel - consult the Twitter Bootstrap docs at 
+      http://twitter.github.com/bootstrap/javascript.html#carousel -->
+	  <div id="main_template" style="margin-left: 115px;margin-right: 115px;margin-top:10px">
+	<div class="panel panel-default" style="width:55%;display:inline-block">
+  <div class="panel-heading">
+    <h3 class="panel-title"><span class="glyphicon glyphicon-cutlery"></span>  MENU</h3>
+  </div>
+  <div class="panel-body">
+  <ul class="nav nav-pills" id="menu-pills">
+  <li class="active"><a href="#list_biscuits">Biscuits</a></li>
+  <li><a href="#list_chips">Chips</a></li>
+  <li><a href="#list_beverages">Beverages</a></li>
+</ul>
+
+<div id="menu-pillsContent" class="tab-content">
+
+
+<div class="list-group tab-pane fade in active " id="list_chips">
+
+  <table class="table table-hover">
+  <thead>
+    <tr>
+      <th width="70"># Left</th>
+      <th width="500">Item Name</th>
+      <th width="150">Price (INR)</th>
+      <th width="100">Quantity</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><span class="badge">14</span></td>
+      <td>Lays Green</td>
+      <td align="right">20</td>
+      <td><div class="input-group">
+      <input type="text" class="form-control" >
+      <span class="input-group-btn">
+        <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-plus"></span></button>
+      </span>
+    </div></td>
+	  
+    </tr>
+    <tr>
+      <td><span class="badge">20</span></td>
+      <td>Cheetos</td>
+      <td align="right">10</td>
+      <td><div class="input-group">
+      <input type="text" class="form-control" >
+      <span class="input-group-btn">
+        <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-plus"></span></button>
+      </span>
+    </div></td>
+	  
+    </tr>
+    <tr>
+      <td><span class="badge">3</span></td>
+      <td>Lays Red</td>
+      <td align="right">15</td>
+      <td><div class="input-group">
+      <input type="text" class="form-control" >
+      <span class="input-group-btn">
+        <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-plus"></span></button>
+      </span>
+    </div></td>
+	  
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="list-group tab-pane fade" id="list_biscuits">
+  <table class="table table-hover">
+  <thead>
+    <tr>
+      <th width="70"># Left</th>
+      <th width="500">Item Name</th>
+      <th width="150">Price (INR)</th>
+      <th width="100">Quantity</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><span class="badge">14</span></td>
+      <td>Hide & Seek</td>
+      <td>20</td>
+      <td><div class="input-group">
+      <input type="text" class="form-control" >
+      <span class="input-group-btn">
+        <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-plus"></span></button>
+      </span>
+    </div></td>
+	  
+    </tr>
+    <tr>
+      <td><span class="badge">20</span></td>
+      <td>Oreos</td>
+      <td>10</td>
+      <td><div class="input-group">
+      <input type="text" class="form-control" >
+      <span class="input-group-btn">
+        <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-plus"></span></button>
+      </span>
+    </div></td>
+	  
+    </tr>
+    <tr>
+      <td><span class="badge">3</span></td>
+      <td>50 - 50</td>
+      <td>15</td>
+      <td><div class="input-group">
+      <input type="text" class="form-control" >
+      <span class="input-group-btn">
+        <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-plus"></span></button>
+      </span>
+    </div></td>
+	  
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="list-group tab-pane fade" id="list_beverages">
+  <table class="table table-hover">
+  <thead>
+    <tr>
+      <th width="70"># Left</th>
+      <th width="500">Item Name</th>
+      <th width="150">Price (INR)</th>
+      <th width="100">Quantity</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><span class="badge">14</span></td>
+      <td>Pepsi</td>
+      <td>20</td>
+      <td><div class="input-group">
+      <input type="text" class="form-control" >
+      <span class="input-group-btn">
+        <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-plus"></span></button>
+      </span>
+    </div></td>
+	  
+    </tr>
+    <tr>
+      <td><span class="badge">20</span></td>
+      <td>Coca -Cola.</td>
+      <td>10</td>
+      <td><div class="input-group">
+      <input type="text" class="form-control" >
+      <span class="input-group-btn">
+        <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-plus"></span></button>
+      </span>
+    </div></td>
+	  
+    </tr>
+    <tr>
+      <td><span class="badge">3</span></td>
+      <td>Miranda</td>
+      <td>15</td>
+      <td><div class="input-group">
+      <input type="text" class="form-control" >
+      <span class="input-group-btn">
+        <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-plus"></span></button>
+      </span>
+    </div></td>
+	  
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+</div>
+
+</div>
+
+<div class="panel panel-primary" style="float:right;width:40%">
+<div class="panel-heading"><span class="glyphicon glyphicon-shopping-cart"></span>  Checkout Cart</div>
+  <div class="panel-body">
+    <p>LIST OF ITEMS:</p>
+  </div>
+
+  <!-- Table -->
+  <table class="table ">
+        <thead>
+          <tr>
+            <th>Item Name</th>
+            <th>Quantity</th>
+            <th>Price(INR)</th>
+			<th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Lays</td>
+            <td>3</td>
+            <td>10</td>
+            <td><button type="button" class="btn btn-default btn-xs">
+  <span class="glyphicon glyphicon-remove"></span>
+</button></td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>Jacob</td>
+            <td>Thornton</td>
+            <td>@fat</td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td>Larry</td>
+            <td>the Bird</td>
+            <td>@twitter</td>
+          </tr>
+        </tbody>
+      </table>
+
+    <h2><span class="label label-default" width:"100%">Total : INR 124</span></h2> 
+</div>
+</div>
+</div>
+
+      <!-- FOOTER -->
+      <footer>
+        <p class="pull-right"><a href="#">Back to top</a></p>
+        <p>&copy; 2014 Company, Inc. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
+      </footer>
+
+    </div><!-- /.container -->
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+ 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="{% static 'Cafe/js/bootstrap.min.js' %}"></script>
+	<script>
+  $(document).ready(function(){
+    $('.carousel').carousel();
+  });
+  
+  $('#menu-pills a').click(function (e) {
+  e.preventDefault()
+  $(this).tab('show')
+})
+</script>
+  </body>
+</html>
