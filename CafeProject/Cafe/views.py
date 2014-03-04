@@ -4,3 +4,6 @@ from django.http import HttpResponse
 
 def index(request):
     return render(request, 'Cafe/index.html')
+
+def menu(request):
+    return render(request, 'Cafe/menuCafe.html')
