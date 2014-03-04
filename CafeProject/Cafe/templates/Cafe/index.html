@@ -82,14 +82,14 @@
 <h3>Registration Form</h3>  
 </div>  
 <div class="modal-body">  
-<form action="[YOUR ACTION]" method="post" accept-charset="UTF-8">
+<form action="[YOUR ACTION]" id="registerForm" method="post" accept-charset="UTF-8">
 <table>
 <tr>
 <td>
 	<label>Name </label>
 </td>
 <td>	
-  <input id="user_username" style="margin-bottom: 15px;" type="text" name="user[username]" size="30" />
+  <input id="user_username" style="margin-bottom: 15px;" type="text" name="user[username]" size="30" required/>
   </td>
  </tr>
  <tr>
@@ -97,7 +97,7 @@
 	<label>Employee Id  </label>
 </td>
 <td>	
-  <input id="user_Id" style="margin-bottom: 15px;" type="text" name="user[Id]" size="30" />
+  <input id="userid" style="margin-bottom: 15px;" type="text" name="user[Id]" size="30" />
   </td>
  </tr>
  <tr>
@@ -122,12 +122,12 @@
   </td>
   </tr>
   </table>
-  
-</form>
-<div class="modal-footer">  
-<a href="#" class="btn btn-success">Register</a>  
+  <div class="modal-footer">  
+<input class="submit btn btn-success" type="submit" value="Register"/>
 <a href="#" class="btn  btn-default" data-dismiss="modal">Close</a>  
-</div>  
+</div> 
+</form>
+
 </div>  
 </div>  
 	
@@ -183,19 +183,19 @@
 	<div class="row">
         <div class="col-lg-4">
           <img class="img-circle" style="margin-left:25%" src="{% static 'Cafe/img/chips.jpg' %}" width=140 height=140 alt="Generic placeholder image">
-          <h2 style="margin-left:25%">Heading</h2>
+          <h2 style="margin-left:25%">Chips</h2>
           <p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna.</p>
           <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
         </div><!-- /.col-lg-4 -->
         <div class="col-lg-4">
           <img class="img-circle" style="margin-left:25%" src="{% static 'Cafe/img/drinks.jpg' %}"  width=140 height=140 alt="Generic placeholder image">
-          <h2 style="margin-left:25%">Heading</h2>
+          <h2 style="margin-left:25%">Drinks</h2>
           <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh.</p>
           <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
         </div><!-- /.col-lg-4 -->
         <div class="col-lg-4">
           <img class="img-circle" style="margin-left:25%" src="{% static 'Cafe/img/biscuits.jpg' %}"  width=140 height=140 alt="Generic placeholder image">
-          <h2 style="margin-left:25%">Heading</h2>
+          <h2 style="margin-left:25%">Biscuits</h2>
           <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
           <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
         </div><!-- /.col-lg-4 -->
@@ -215,10 +215,27 @@
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <script src="{% static 'Cafe/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'Cafe/js/jquery.form.js' %}"></script>
+    <script src="{% static 'Cafe/js/jquery.validate.min.js' %}"></script>
+    <script src="{% static 'Cafe/js/additional-methods.min.js' %}"></script>
 	<script>
   $(document).ready(function(){
     $('.carousel').carousel();
+    $("#registerForm").validate({
+  	  rules: {
+  		  user_username: {
+  			  required: true
+  		  },
+    		  userid: {
+    			  digits: true
+    	  },
+    	  	  user_phone: {
+    	  		  digits:true
+    	  }  	  		  
+  	  }
+    });
   });
+  
 </script>
-  </body>
+</body>
 </html>
