@@ -1,5 +1,5 @@
 from django.db import models
-from uuidfield import UUIDField
+
 # Create your models here.
 class User(models.Model):
     empid = models.IntegerField(primary_key=True)
@@ -15,7 +15,6 @@ class Product(models.Model):
     price = models.IntegerField(max_length=10)
     
 class Transaction(models.Model):
-    orderid = UUIDField(auto=True)
     empid = models.ForeignKey(User)
     productid = models.ForeignKey(Product)
     time = models.DateTimeField()

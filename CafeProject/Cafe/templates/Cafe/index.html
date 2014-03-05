@@ -50,10 +50,10 @@
 			<!-- Login form here -->
 			<form action="[YOUR ACTION]" method="post" accept-charset="UTF-8">
 	<label>Username:</label>		
-  <input id="user_username" style="margin-bottom: 15px;" type="text" name="user[username]" size="30" />
+  <input id="username" style="margin-bottom: 15px;" type="text" name="username" size="30" />
   <label>Password:</label>
-  <input id="user_password" style="margin-bottom: 15px;" type="password" name="user[password]" size="30" />
-  <input id="user_remember_me" style="float: left; margin-right: 10px;" type="checkbox" name="user[remember_me]" value="1" />
+  <input id="password" style="margin-bottom: 15px;" type="password" name="password" size="30" />
+  <input id="user_remember_me" style="float: left; margin-right: 10px;" type="checkbox" name="user_remember_me" value="1" />
   <label class="string optional" for="user_remember_me"> Remember me</label>
  
   <input class="btn btn-primary" style="clear: left; width: 100%; height: 32px; font-size: 13px;" type="submit" name="commit" value="Sign In" />
@@ -81,14 +81,14 @@
 <h3>Registration Form</h3>  
 </div>  
 <div class="modal-body">  
-<form action="[YOUR ACTION]" id="registerForm" onsubmit="return checkPassword();" method="post" accept-charset="UTF-8">
+<form id="registerForm" onsubmit="return checklogin();" accept-charset="UTF-8">
 <table>
 <tr>
 <td>
 	<label>Name </label>
 </td>
 <td>	
-  <input id="user_username" style="margin-bottom: 15px;" type="text" name="user[username]" size="30" data-validation="length alphabetic" 
+  <input id="user_username1" style="margin-bottom: 15px;" type="text" name="user_username1" size="30" data-validation="length alphanumeric" 
 		 data-validation-length="3-12" data-validation-error-msg="The user name has to be an alphabetic value between 3-12 characters" />
   </td>
  </tr>
@@ -97,28 +97,28 @@
 	<label>Employee Id  </label>
 </td>
 <td>	
-  <input id="userid" style="margin-bottom: 15px;" type="text" name="user[Id]" size="30" data-validation="number" />
+  <input id="userid" style="margin-bottom: 15px;" type="text" name="userid" size="30" data-validation="number" />
   </td>
  </tr>
  <tr>
  <td>
   <label>Phone </label>
 </td><td>  
-  <input id="user_phone" style="margin-bottom: 15px;" type="text" name="user[phone]" size="30" data-validation="number"/>
+  <input id="user_phone" style="margin-bottom: 15px;" type="text" name="user_phone" size="30" data-validation="number"/>
   </td>
  </tr>
  <tr>
  <td>
   <label>Password </label>
   </td><td>
-  <input id="user_pass" style="margin-bottom: 15px;" type="password" name="user[password]" size="30" />
+  <input id="user_pass" style="margin-bottom: 15px;" type="password" name="user_pass" size="30" />
   </td>
  </tr>
  <tr>
  <td>
   <label>Confirm Password &nbsp; &nbsp;  </label>
   </td><td>
-  <input id="confirm_user_password" style="margin-bottom: 15px;" type="password" name="user[password]" size="30" />
+  <input id="confirm_user_password" style="margin-bottom: 15px;" type="password" name="confirm_user_password" size="30" />
   <div id="passincorrect"></div>
   </td>
   </tr>
@@ -224,7 +224,7 @@
   $.validate({
 	  validateOnBlur : false
   });
-  function checkPassword()
+  function checklogin()
   {
 	  pass = $("#user_pass").val();
 	  confirmpass = $("#confirm_user_password").val();
@@ -236,8 +236,38 @@
 		  }
 	  else{
 		  $("#passincorrect").empty();
-	  		}
+		  username = $('#user_username1').val();
+		  userid = $('#userid').val();
+		  userphone = $('#user_phone').val();
+		  userpass = $('#user_pass').val();
+		  alert("inside else")
+		  $.post("signup",
+				    {	username: username,
+          	  			userid: userid,
+          	  			userphone: userphone,
+          	  			userpass: userpass,
+				     csrfmiddlewaretoken:'{{ csrf_token }}'
+				     },
+				    function(data,status){
+				      console.log("Data: " + data + "\nStatus: " + status);
+				      if(data == "True")
+				    	  {
+				    	  window.location.assign("menucafe")
+				    	  }
+				      
+				      else
+				      {
+				    		alert("User already present");  
+				      }
+				    })
+				    .fail(function(xhr) {
+				        console.log("Error: " + xhr.statusText);
+				        alert("Error: " + xhr.statusText);
+				    });
+				    return false;
+	  	}
   }
 </script>
 </body>
 </html>
+ 
