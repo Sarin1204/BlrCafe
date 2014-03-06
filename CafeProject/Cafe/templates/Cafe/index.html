@@ -7,8 +7,14 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="shortcut icon" href="ico/favicon.ico">
-
-    <title>Carousel Template for Bootstrap</title>
+	<style>
+	.colorclass{
+		background-color: #f2dede !important; 
+		border-color: #ebccd1;
+		color: #a94442;
+	}
+	</style>
+    <title>Ugam-Blr Cafe</title>
 
     <!-- Bootstrap core CSS -->
 	{% load staticfiles %}
@@ -48,9 +54,9 @@
             <a class="dropdown-toggle" href="#" data-toggle="dropdown">Sign In <strong class="caret"></strong></a>
             <div class="dropdown-menu" style="padding: 15px; padding-bottom: 0px;">
 			<!-- Login form here -->
-			<form action="[YOUR ACTION]" method="post" accept-charset="UTF-8">
-	<label>Username:</label>		
-  <input id="username" style="margin-bottom: 15px;" type="text" name="username" size="30" />
+			<form method="post" onsubmit="return signin()"accept-charset="UTF-8">
+	<label>Employee Id:</label>		
+  <input id=empid style="margin-bottom: 15px;" type="text" name="empid" size="30" />
   <label>Password:</label>
   <input id="password" style="margin-bottom: 15px;" type="password" name="password" size="30" />
   <input id="user_remember_me" style="float: left; margin-right: 10px;" type="checkbox" name="user_remember_me" value="1" />
@@ -61,7 +67,7 @@
 </form>
 <br/>
 			</div>
-			<li style="position:relative; left:-10px"><a href="/users/sign_up">Sign Up</a></li>
+			<li style="position:relative; left:-10px"><a data-toggle="modal" href="#modalRegister">Sign Up</a></li>
               
 			  
             
@@ -73,9 +79,20 @@
 
       </div>
     </div>
+    <!-- Modal window already present user form -->
+	<div class="container">  
+<div id="modalError" class="colorclass modal fade in" style="display: none; ">  
+<div class="modal-header">  
+<a class="close" data-dismiss="modal">x</a>  
+<h3>Registration Error</h3>
+<hr>  
+<label id="errormessage"></label>
+</div> 
+</div>
+</div>
 	<!-- Modal window html form -->
 	<div class="container">  
-<div id="example" class="modal fade in" style="display: none; ">  
+<div id="modalRegister" class="modal fade in" style="display: none; ">  
 <div class="modal-header">  
 <a class="close" data-dismiss="modal">x</a>  
 <h3>Registration Form</h3>  
@@ -147,7 +164,7 @@
       <div class="carousel-caption">
         <h1>Ugam BLR-Cafe</h1>
               <p style="font-size:21px; color:orange">Ugam cares about your hunger. Welcome to Ugam BLR-Cafe - cheap biscuits, chips and drinks.</p>
-              <p><a data-toggle="modal" href="#example" class="btn btn-primary btn-large">Sign up</a></p>  
+              <p><a data-toggle="modal" href="#modalRegister" class="btn btn-primary btn-large">Sign up</a></p>  
       </div>
     </div>
     <div class="item">
@@ -155,7 +172,7 @@
       <div class="carousel-caption">
        <h1>Ugam BLR-Cafe</h1>
               <p style="font-size:21px; color:orange">Ugam cares about your hunger. Welcome to Ugam BLR-Cafe - cheap biscuits, chips and drinks.</p>
-              <p><a data-toggle="modal" href="#example" class="btn btn-primary btn-large">Sign up</a></p> 
+              <p><a data-toggle="modal" href="#modalRegister" class="btn btn-primary btn-large">Sign up</a></p> 
       </div>
     </div>
     <div class="item">
@@ -163,7 +180,7 @@
       <div class="carousel-caption">
        <h1>Ugam BLR-Cafe</h1>
               <p style="font-size:21px; color:orange">Ugam cares about your hunger. Welcome to Ugam BLR-Cafe - cheap biscuits, chips and drinks.</p>
-              <p><a data-toggle="modal" href="#example" class="btn btn-primary btn-large">Sign up</a></p> 
+              <p><a data-toggle="modal" href="#modalRegister" class="btn btn-primary btn-large">Sign up</a></p> 
       </div>
     </div>
     <div class="item">
@@ -171,7 +188,7 @@
       <div class="carousel-caption">
         <h1>Ugam BLR-Cafe</h1>
               <p style="font-size:21px; color:orange">Ugam cares about your hunger. Welcome to Ugam BLR-Cafe - cheap biscuits, chips and drinks.</p>
-              <p><a data-toggle="modal" href="#example" class="btn btn-primary btn-large">Sign up</a></p> 
+              <p><a data-toggle="modal" href="#modalRegister" class="btn btn-primary btn-large">Sign up</a></p> 
       </div>
     </div>
   </div><!-- /.carousel-inner -->
@@ -240,7 +257,7 @@
 		  userid = $('#userid').val();
 		  userphone = $('#user_phone').val();
 		  userpass = $('#user_pass').val();
-		  alert("inside else")
+		  /* alert("inside else") */
 		  $.post("signup",
 				    {	username: username,
           	  			userid: userid,
@@ -252,20 +269,81 @@
 				      console.log("Data: " + data + "\nStatus: " + status);
 				      if(data == "True")
 				    	  {
-				    	  window.location.assign("menucafe")
+				    	  	localStorage.setItem("username", username);
+				    	  	localStorage.setItem("userid", userid);
+				    	  	localStorage.setItem("userphone", userphone);
+				    	  	localStorage.setItem("userpass", userpass);
+				    	  	window.location.assign("menucafe")
 				    	  }
 				      
 				      else
 				      {
-				    		alert("User already present");  
+				    	  	$("#modalRegister").modal('hide')
+				    	  	$("#errormessage").empty()
+				    	  	$("#errormessage").append('The selected employee id has already been registered.')
+				    	  	$("#modalError").modal('show')
+				    		 
 				      }
 				    })
 				    .fail(function(xhr) {
 				        console.log("Error: " + xhr.statusText);
-				        alert("Error: " + xhr.statusText);
+				       
 				    });
 				    return false;
 	  	}
+  }
+  function signin()
+  {
+	  empid = $('#empid').val();
+	  password = $('#password').val();
+	  var notnum = isNaN(empid)
+	 /*  alert(notnum) */
+	  if(empid.length == 0 ||  password.length == 0 || notnum == true)
+		  {
+		  	/* alert("inside if") */
+		  	$("#errormessage").empty();
+  	  		$("#errormessage").append('Incorrect Sign-in. Please try again.');
+		  	$("#modalError").modal('show');
+		  	return false;
+		  }
+	  else{
+		  $.post("signin",
+				    {	empid: empid,
+        	  			password: password,
+				     csrfmiddlewaretoken:'{{ csrf_token }}'
+				     },
+				    function(data,status){
+				      console.log("Data: " + data + "\nStatus: " + status);
+				      if(data == "false")
+				    	  {
+				    	  	
+				    	  	$("#modalRegister").modal('hide')
+				    	  	$("#errormessage").empty()
+				    	  	$("#errormessage").append('Invalid Credentials. Please try again')
+				    	  	$("#modalError").modal('show')
+				    		 
+				    	  }
+				      
+				      else
+				      {
+				    	  console.log("Inside true")
+				    	  alert("Data:"+JSON.stringify(data));
+				    	   	localStorage.setItem("username", data.username);
+				    	  	localStorage.setItem("userid", data.empid);
+				    	  	localStorage.setItem("userphone", data.phone);
+				    	  	localStorage.setItem("userpass", password); 
+				    	  	window.location.assign("menucafe")
+				    		 
+				      }
+				    })
+				    .fail(function(xhr) {
+				        console.log("Error: " + xhr.statusText);
+				    });
+				    return false;
+		  
+		  
+	  }
+		  
   }
 </script>
 </body>
