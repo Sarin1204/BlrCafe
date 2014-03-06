@@ -10,15 +10,23 @@ class User(models.Model):
         return self.name
     
 class Product(models.Model):
+    PRODUCT_TYPES = (
+        ('Chips', 'Chips'),
+        ('Beverages', 'Beverages'),
+        ('Biscuits', 'Biscuits'),
+        ('Chocolates', 'Chocolates'),
+        ("Heat'n'Eat", "Heat'n'Eat"),
+    )
+    
     name = models.CharField(max_length=50)
     inventory = models.IntegerField(max_length=5)
     price = models.IntegerField(max_length=10)
+    type = models.CharField(max_length=50, choices=PRODUCT_TYPES)
+    def __str__(self):
+        return self.name
     
 class Transaction(models.Model):
     empid = models.ForeignKey(User)
     productid = models.ForeignKey(Product)
     time = models.DateTimeField()
     quantity = models.IntegerField(max_length=5)
-    
-    
-    
