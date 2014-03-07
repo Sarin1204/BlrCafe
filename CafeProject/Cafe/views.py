@@ -17,6 +17,7 @@ def menu(request):
     heatneat_list=[]
     for e in Product.objects.filter(type='Chips'):
         if e.inventory != 0:
+            print("photourl==",e.photo.url)
             chips_list.append(e)
     for e in Product.objects.filter(type='Beverages'):
         if e.inventory != 0:

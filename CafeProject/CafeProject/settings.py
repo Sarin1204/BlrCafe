@@ -39,11 +39,12 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'Cafe',
 )
-PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
-print("PR====",PROJECT_ROOT)
+SITE_ROOT = os.path.dirname(os.path.realpath(__file__))
+print("SR====",SITE_ROOT)
 MEDIA_ROOT = (
-     "/Cafe/static/Cafe/img/products"
+     os.path.join(SITE_ROOT, "media")  
 )
+MEDIA_URL = '/media/'
 print("MR====",MEDIA_ROOT)
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',

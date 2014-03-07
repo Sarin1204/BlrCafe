@@ -20,6 +20,9 @@
 		right: -30%;
 	
 	}
+	 td { text-align:center; vertical-align:middle; }
+	 
+	 th { text-align:center!important; vertical-align:middle; }
 	</style>
     <title>BLR-Cafe</title>
 
@@ -128,7 +131,8 @@
   <table class="table table-hover">
   <thead>
     <tr>
-      <th width="70"># Left</th>
+      <th width="70">Stock</th>
+      <th></th>
       <th width="500">Item Name</th>
       <th width="150">Price <span class="WebRupee">&#x20B9;</span></th>
       <th width="100">Quantity</th>
@@ -140,8 +144,9 @@
     <div style="display:none" id="chip_id{{ forloop.counter }}">{{ chip.id }}</div>
     <tr>
         <td><span id="chip_inventory{{ forloop.counter }}" class="badge">{{ chip.inventory }}</span></td>
-        <td id = "chip_name{{ forloop.counter }}">{{ chip.name }}</td>
-        <td id = "chip_price{{ forloop.counter }}" align="right">{{ chip.price }}</td>
+        <td id = "chip_photo{{ forloop.counter }}"><img width=100 height=100 src="{{ chip.photo.url }}"></img></td>
+        <td id = "chip_name{{ forloop.counter }}">{{ chip.name }}</td>    
+        <td id = "chip_price{{ forloop.counter }}">{{ chip.price }}</td>
         <td><div class="input-group">
       <input id="chip_quantity{{ forloop.counter }}" type="text" class="form-control" >
       <span class="input-group-btn">
@@ -173,6 +178,7 @@
     <div style="display:none" id="biscuit_id{{ forloop.counter }}">{{ biscuit.id }}</div>
     <tr>
         <td><span id="biscuit_inventory{{ forloop.counter }}" class="badge">{{ biscuit.inventory }}</span></td>
+        <td id = "chip_photo{{ forloop.counter }}"><img width=100 height=100 src="{{ biscuit.photo.url }}"></img></td>
         <td id="biscuit_name{{ forloop.counter }}">{{ biscuit.name }}</td>
         <td id="biscuit_price{{ forloop.counter }}" align="right">{{ biscuit.price }}</td>
         <td><div class="input-group">
@@ -206,6 +212,7 @@
     <div style="display:none" id="chocolate_id{{ forloop.counter }}">{{ chocolate.id }}</div>
     <tr>
         <td><span id="chocolate_inventory{{ forloop.counter }}" class="badge">{{ chocolate.inventory }}</span></td>
+        <td id = "chip_photo{{ forloop.counter }}"><img width=100 height=100 src="{{ chocolate.photo.url }}"></img></td>
         <td id="chocolate_name{{ forloop.counter }}" >{{ chocolate.name }}</td>
         <td id="chocolate_price{{ forloop.counter }}" align="right">{{ chocolate.price }}</td>
         <td><div class="input-group">
@@ -239,6 +246,7 @@
     <div style="display:none" id="heatneat_id{{ forloop.counter }}">{{ heatneat.id }}</div>
     <tr>
         <td><span id="heatneat_inventory{{ forloop.counter }}" class="badge">{{ heatneat.inventory }}</span></td>
+        <td id = "chip_photo{{ forloop.counter }}"><img width=100 height=100 src="{{ heatneat.photo.url }}"></img></td>
         <td id="heatneat_name{{ forloop.counter }}" >{{ heatneat.name }}</td>
         <td id="heatneat_price{{ forloop.counter }}"  align="right">{{ heatneat.price }}</td>
         <td><div class="input-group">
@@ -273,6 +281,7 @@
     <div style="display:none" id="beverage_id{{ forloop.counter }}">{{ beverage.id }}</div>
     <tr>
         <td><span id="beverage_inventory{{ forloop.counter }}" class="badge">{{ beverage.inventory }}</span></td>
+        <td id = "chip_photo{{ forloop.counter }}"><img width=100 height=100 src="{{ beverage.photo.url }}"></img></td>
         <td id="beverage_name{{ forloop.counter }}">{{ beverage.name }}</td>
         <td id="beverage_price{{ forloop.counter }}" align="right">{{ beverage.price }}</td>
         <td><div class="input-group">
