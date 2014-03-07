@@ -13,6 +13,13 @@
 		border-color: #ebccd1;
 		color: #a94442;
 	}
+	.panelbodyclass{
+		font-size:20px;
+		font-weight:bold;
+		position: relative;
+		right: -30%;
+	
+	}
 	</style>
     <title>BLR-Cafe</title>
 
@@ -36,7 +43,7 @@
   <body background="{% static 'Cafe/img/background.png' %}" style="background-repeat: no-repeat;">
  <!--  Error message popup code -->
   <div class="container">  
-<div id="modalError" class="colorclass modal fade in" style="display: none; ">  
+<div id="modalError" class="colorclass modal fade in" style="display: none;margin-top:auto;margin-bottom:auto; ">  
 <div class="modal-header">  
 <a class="close" data-dismiss="modal">x</a>  
 <h3>Error</h3>
@@ -290,7 +297,7 @@
 <div class="panel panel-primary" style="float:right;width:40%;border-color: rgb(168, 168, 235);box-shadow: 16px 3px 10px -7px #888, -10px 10px 20px -7px #888;">
 <div class="panel-heading"><span class="glyphicon glyphicon-shopping-cart"></span>  Checkout Cart</div>
   <div class="panel-body">
-    <p>LIST OF ITEMS:</p>
+    <p id="panelBody" class="panelbodyclass">No items selected</p>
   </div>
 
   <!-- Table -->
@@ -303,12 +310,11 @@
           </tr>
         </thead> -->
         <tbody>
-        <tr><td>No items selected</tr>
         </tbody>
       </table>
 
     <h2 style="display:inline-block"><span class="label label-default">Total : <span class="WebRupee">&#x20B9;</span><span id = "checkoutPrice"></span></span></h2> 
-    <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#exampleModal" style="float:right;margin-top:15px">
+    <button class="btn btn-primary btn-lg" data-toggle="modal" onclick="validateCheckout()" style="float:right;margin-top:15px">
   Checkout
 </button>
 </div>
@@ -316,12 +322,12 @@
 <!-- CONFIRMING MODAL FOR CHECKOUT -->
 <div id="exampleModal" class="modal fade in bs-example-modal-sm" style="display: none;margin-top:auto;margin-bottom:auto; ">  
 <div class="modal-header">  
-<a class="close" data-dismiss="modal">x</a>  
+<a class="close" onclick="disappearModal()" data-dismiss="modal">x</a>  
 <h3>Are you sure ?</h3>  
 </div>  
   <div class="modal-footer">  
 <input class="submit btn btn-default"  value="Yes"/>
-<a href="#" class="btn  btn-default" data-dismiss="modal">Close</a>  
+<a href="#" class="btn  btn-default" onclick="disappearModal()" data-dismiss="modal">Close</a>  
 
 </div>
 
@@ -411,7 +417,7 @@ function productClick(product,row)
 	  var flag = false;
 	  var itemId;
 	 
-	  if(tableSize >= 1)
+	  if(tableSize > 0)
 		  {
 		  console.log("inside not empty")
 	  $("#checkoutbody tr").each(function(){
@@ -436,7 +442,8 @@ function productClick(product,row)
 		  }
 	  else{
 		  console.log("inside empty")
-		  $("#checkoutTable").empty();
+		  $("#panelBody").empty();
+		  $("#panelBody").append("Items Selected");
 		  $("#checkoutTable").append('<thead><tr><th>Item Name</th><th>Quantity</th><th>Price<span class="WebRupee">&#x20B9;</span></th></tr></thead><tbody id="checkoutbody"><tr id = "'+productid+'"><td>'+productname+'</td><td id="productquantity">'+productquantity+'</td><td id="totalproductprice">'+totalproductprice+'</td></tr>')
 	  }
 	  $("#checkoutPrice").empty()
@@ -465,6 +472,25 @@ function productClick(product,row)
 	            e.preventDefault();
 	        }
 	    });
+  }
+  function validateCheckout()
+  {
+	  var tableSize = $('#checkoutbody tr').length;
+	  console.log("tableSize=="+tableSize)
+	  if(tableSize <= 0)
+		  {
+		  $("#errormessage").empty()
+		  	$("#errormessage").append("Cart is empty")
+		  	$("#modalError").modal('show')
+		  }
+	  else{
+		  $("#exampleModal").css("display","block");
+	  }
+	  
+  }
+  function disappearModal()
+  {
+	  $("#exampleModal").css("display","none");
   }
 </script>
   </body>
