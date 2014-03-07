@@ -30,7 +30,7 @@ class signIn(object):
             #code to check if user already present is to be added
             if not checkUser:
                 print('inside not')
-                newuser = User(empid=userid,name=user_username, phone=user_phone,password=user_pass) 
+                newuser = User(empid=userid,name=user_username, phone=user_phone,password=user_pass,credits=0) 
                 newuser.save()
                 response = HttpResponse("True")
                 return response
