@@ -7,7 +7,13 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="shortcut icon" href="ico/favicon.ico">
-
+	<style>
+	.colorclass{
+		background-color: #f2dede !important; 
+		border-color: #ebccd1;
+		color: #a94442;
+	}
+	</style>
     <title>BLR-Cafe</title>
 
     <!-- Bootstrap core CSS -->
@@ -28,6 +34,17 @@
 	<script type="text/javascript" src="lib/jquery.js"></script>
   </head>
   <body background="{% static 'Cafe/img/background.png' %}" style="background-repeat: no-repeat;">
+ <!--  Error message popup code -->
+  <div class="container">  
+<div id="modalError" class="colorclass modal fade in" style="display: none; ">  
+<div class="modal-header">  
+<a class="close" data-dismiss="modal">x</a>  
+<h3>Error</h3>
+<hr>  
+<label id="errormessage"></label>
+</div> 
+</div>
+</div>
   <!-- NAVBAR
 ================================================== -->
   <div class="navbar-wrapper" >
@@ -89,8 +106,10 @@
   </div>
   <div class="panel-body">
   <ul class="nav nav-pills" id="menu-pills">
-  <li class="active"><a href="#list_biscuits">Biscuits</a></li>
-  <li><a href="#list_chips">Chips</a></li>
+  <li class="active"><a href="#list_chips">Chips</a></li>
+  <li><a href="#list_biscuits">Biscuits</a></li>
+  <li><a href="#list_chocolates">Chocolates</a></li>
+  <li><a href="#list_heatneat">Heat'n'Eat</a></li>
   <li><a href="#list_beverages">Beverages</a></li>
 </ul>
 
@@ -109,42 +128,24 @@
     </tr>
   </thead>
   <tbody>
+  {% if chips_list %}
+    {% for chip in chips_list %}
+    <div style="display:none" id="chip_id{{ forloop.counter }}">{{ chip.id }}</div>
     <tr>
-      <td><span class="badge">14</span></td>
-      <td>Lays Green</td>
-      <td align="right">20</td>
-      <td><div class="input-group">
-      <input type="text" class="form-control" >
+        <td><span id="chip_inventory{{ forloop.counter }}" class="badge">{{ chip.inventory }}</span></td>
+        <td id = "chip_name{{ forloop.counter }}">{{ chip.name }}</td>
+        <td id = "chip_price{{ forloop.counter }}" align="right">{{ chip.price }}</td>
+        <td><div class="input-group">
+      <input id="chip_quantity{{ forloop.counter }}" type="text" class="form-control" >
       <span class="input-group-btn">
-        <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-plus"></span></button>
+        <button onclick="productClick('chip',{{ forloop.counter }})" class="btn btn-default" type="button"><span class="glyphicon glyphicon-plus"></span></button>
       </span>
     </div></td>
-	  
-    </tr>
-    <tr>
-      <td><span class="badge">20</span></td>
-      <td>Cheetos</td>
-      <td align="right">10</td>
-      <td><div class="input-group">
-      <input type="text" class="form-control" >
-      <span class="input-group-btn">
-        <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-plus"></span></button>
-      </span>
-    </div></td>
-	  
-    </tr>
-    <tr>
-      <td><span class="badge">3</span></td>
-      <td>Lays Red</td>
-      <td align="right">15</td>
-      <td><div class="input-group">
-      <input type="text" class="form-control" >
-      <span class="input-group-btn">
-        <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-plus"></span></button>
-      </span>
-    </div></td>
-	  
-    </tr>
+       </tr>
+    {% endfor %}
+{% else %}
+    <p>No chips are available.</p>
+{% endif %}
   </tbody>
 </table>
 </div>
@@ -160,45 +161,94 @@
     </tr>
   </thead>
   <tbody>
+  {% if biscuits_list %}
+    {% for biscuit in biscuits_list %}
+    <div style="display:none" id="biscuit_id{{ forloop.counter }}">{{ biscuit.id }}</div>
     <tr>
-      <td><span class="badge">14</span></td>
-      <td>Hide & Seek</td>
-      <td>20</td>
-      <td><div class="input-group">
-      <input type="text" class="form-control" >
+        <td><span id="biscuit_inventory{{ forloop.counter }}" class="badge">{{ biscuit.inventory }}</span></td>
+        <td id="biscuit_name{{ forloop.counter }}">{{ biscuit.name }}</td>
+        <td id="biscuit_price{{ forloop.counter }}" align="right">{{ biscuit.price }}</td>
+        <td><div class="input-group">
+      <input id="biscuit_quantity{{ forloop.counter }}" type="text" class="form-control" >
       <span class="input-group-btn">
-        <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-plus"></span></button>
+        <button onclick="productClick('biscuit',{{ forloop.counter }})" class="btn btn-default" type="button"><span class="glyphicon glyphicon-plus"></span></button>
       </span>
     </div></td>
-	  
-    </tr>
-    <tr>
-      <td><span class="badge">20</span></td>
-      <td>Oreos</td>
-      <td>10</td>
-      <td><div class="input-group">
-      <input type="text" class="form-control" >
-      <span class="input-group-btn">
-        <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-plus"></span></button>
-      </span>
-    </div></td>
-	  
-    </tr>
-    <tr>
-      <td><span class="badge">3</span></td>
-      <td>50 - 50</td>
-      <td>15</td>
-      <td><div class="input-group">
-      <input type="text" class="form-control" >
-      <span class="input-group-btn">
-        <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-plus"></span></button>
-      </span>
-    </div></td>
-	  
-    </tr>
+       </tr>
+    {% endfor %}
+{% else %}
+    <p>No biscuits are available.</p>
+{% endif %}
   </tbody>
 </table>
 </div>
+
+<div class="list-group tab-pane fade" id="list_chocolates">
+  <table class="table table-hover">
+  <thead>
+    <tr>
+      <th width="70"># Left</th>
+      <th width="500">Item Name</th>
+      <th width="150">Price <span class="WebRupee">&#x20B9;</span></th>
+      <th width="100">Quantity</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% if chocolates_list %}
+    {% for chocolate in chocolates_list %}
+    <div style="display:none" id="chocolate_id{{ forloop.counter }}">{{ chocolate.id }}</div>
+    <tr>
+        <td><span id="chocolate_inventory{{ forloop.counter }}" class="badge">{{ chocolate.inventory }}</span></td>
+        <td id="chocolate_name{{ forloop.counter }}" >{{ chocolate.name }}</td>
+        <td id="chocolate_price{{ forloop.counter }}" align="right">{{ chocolate.price }}</td>
+        <td><div class="input-group">
+      <input id="chocolate_quantity{{ forloop.counter }}" type="text" class="form-control" >
+      <span class="input-group-btn">
+        <button onclick="productClick('chocolate',{{ forloop.counter }})" class="btn btn-default" type="button"><span class="glyphicon glyphicon-plus"></span></button>
+      </span>
+    </div></td>
+       </tr>
+    {% endfor %}
+{% else %}
+    <p>No chocolates are available.</p>
+{% endif %}
+  </tbody>
+</table>
+</div>
+
+<div class="list-group tab-pane fade" id="list_heatneat">
+  <table class="table table-hover">
+  <thead>
+    <tr>
+      <th width="70"># Left</th>
+      <th width="500">Item Name</th>
+      <th width="150">Price <span class="WebRupee">&#x20B9;</span></th>
+      <th width="100">Quantity</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% if heatneat_list %}
+    {% for heatneat in heatneat_list %}
+    <div style="display:none" id="heatneat_id{{ forloop.counter }}">{{ heatneat.id }}</div>
+    <tr>
+        <td><span id="heatneat_inventory{{ forloop.counter }}" class="badge">{{ heatneat.inventory }}</span></td>
+        <td id="heatneat_name{{ forloop.counter }}" >{{ heatneat.name }}</td>
+        <td id="heatneat_price{{ forloop.counter }}"  align="right">{{ heatneat.price }}</td>
+        <td><div class="input-group">
+      <input id="heatneat_quantity{{ forloop.counter }}" type="text" class="form-control" >
+      <span class="input-group-btn">
+        <button onclick="productClick('heatneat',{{ forloop.counter }})" class="btn btn-default" type="button"><span class="glyphicon glyphicon-plus"></span></button>
+      </span>
+    </div></td>
+       </tr>
+    {% endfor %}
+{% else %}
+    <p>No Heat'n'Eat products are available.</p>
+{% endif %}
+  </tbody>
+</table>
+</div>
+
 
 <div class="list-group tab-pane fade" id="list_beverages">
   <table class="table table-hover">
@@ -211,42 +261,24 @@
     </tr>
   </thead>
   <tbody>
+  {% if beverages_list %}
+    {% for beverage in beverages_list %}
+    <div style="display:none" id="beverage_id{{ forloop.counter }}">{{ beverage.id }}</div>
     <tr>
-      <td><span class="badge">14</span></td>
-      <td>Pepsi</td>
-      <td>20</td>
-      <td><div class="input-group">
-      <input type="text" class="form-control" >
+        <td><span id="beverage_inventory{{ forloop.counter }}" class="badge">{{ beverage.inventory }}</span></td>
+        <td id="beverage_name{{ forloop.counter }}">{{ beverage.name }}</td>
+        <td id="beverage_price{{ forloop.counter }}" align="right">{{ beverage.price }}</td>
+        <td><div class="input-group">
+      <input id="beverage_quantity{{ forloop.counter }}" type="text" class="form-control" >
       <span class="input-group-btn">
-        <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-plus"></span></button>
+        <button onclick="productClick('beverage',{{ forloop.counter }})" class="btn btn-default" type="button"><span class="glyphicon glyphicon-plus"></span></button>
       </span>
     </div></td>
-	  
-    </tr>
-    <tr>
-      <td><span class="badge">20</span></td>
-      <td>Coca -Cola.</td>
-      <td>10</td>
-      <td><div class="input-group">
-      <input type="text" class="form-control" >
-      <span class="input-group-btn">
-        <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-plus"></span></button>
-      </span>
-    </div></td>
-	  
-    </tr>
-    <tr>
-      <td><span class="badge">3</span></td>
-      <td>Miranda</td>
-      <td>15</td>
-      <td><div class="input-group">
-      <input type="text" class="form-control" >
-      <span class="input-group-btn">
-        <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-plus"></span></button>
-      </span>
-    </div></td>
-	  
-    </tr>
+       </tr>
+    {% endfor %}
+{% else %}
+    <p>No beverage products are available.</p>
+{% endif %}
   </tbody>
 </table>
 </div>
@@ -268,34 +300,13 @@
             <th>Item Name</th>
             <th>Quantity</th>
             <th>Price <span class="WebRupee">&#x20B9;</span></th>
-			<th>Action</th>
           </tr>
         </thead>
-        <tbody>
-          <tr>
-            <td>Lays</td>
-            <td>3</td>
-            <td>10</td>
-            <td><button type="button" class="btn btn-default btn-xs">
-  <span class="glyphicon glyphicon-remove"></span>
-</button></td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>@fat</td>
-          </tr>
-          <tr>
-            <td>3</td>
-            <td>Larry</td>
-            <td>the Bird</td>
-            <td>@twitter</td>
-          </tr>
+        <tbody id="checkoutTable">
         </tbody>
       </table>
 
-    <h2 style="display:inline-block"><span class="label label-default" width:"100%">Total : <span class="WebRupee">&#x20B9;</span> 124</span></h2> 
+    <h2 style="display:inline-block"><span class="label label-default" width:"100%">Total : <span class="WebRupee">&#x20B9;</span><span id = "checkoutPrice"></span></span></h2> 
     <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#exampleModal" style="float:right;margin-top:15px">
   Checkout
 </button>
@@ -332,12 +343,122 @@
 	<script>
   $(document).ready(function(){
     $('.carousel').carousel();
+    onlyNumber("#beverage_quantity")
+    onlyNumber("#chip_quantity")
+    onlyNumber("#biscuit_quantity")
+    onlyNumber("#heatneat_quantity")
+    onlyNumber("#chocolate_quantity")
+    
   });
   
   $('#menu-pills a').click(function (e) {
   e.preventDefault()
   $(this).tab('show')
 })
+var checkoutPrice = 0
+function onlyNumber(input)
+  {
+	  
+	  $(input).keydown(function (e) {
+	        // Allow: backspace, delete, tab, escape, enter and .
+	        if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 190]) !== -1 ||
+	             // Allow: Ctrl+A
+	            (e.keyCode == 65 && e.ctrlKey === true) || 
+	             // Allow: home, end, left, right
+	            (e.keyCode >= 35 && e.keyCode <= 39)) {
+	                 // let it happen, don't do anything
+	                 return;
+	        }
+	        // Ensure that it is a number and stop the keypress
+	        if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+	            e.preventDefault();
+	        }
+	    });
+  }
+
+function productClick(product,row)
+  {
+		console.log("product=="+product)
+		console.log("row=="+row)
+	  if($("#"+product+"_quantity"+row).val().length <= 0)
+		  {
+		  	console.log("inside no quantity")
+		  	$("#errormessage").empty()
+		  	$("#errormessage").append("Please add a quantity value")
+		  	$("#modalError").modal('show')
+		  	return
+		  }
+		 productquantity = $("#"+product+"_quantity"+row).val()
+		  productquantity= parseInt(productquantity)
+		  
+		  productinventory = $("#"+product+"_inventory"+row).text()
+		  productinventory= parseInt(productinventory)
+	  if(productquantity > productinventory)
+		  {
+		  	console.log("inside greater than inventory")
+		  	$("#errormessage").empty()
+		  	$("#errormessage").append("Quantity selected cannot be greater than inventory")
+		  	$("#modalError").modal('show')
+		  	return
+		  }
+	  productid = $("#"+product+"_id"+row).text()
+	  productid = parseInt(productid)
+	  
+	  productname = $("#"+product+"_name"+row).text()
+	  productprice = $("#"+product+"_price"+row).text()
+	  productprice = parseInt(productprice)
+	  
+	  productquantity = $("#"+product+"_quantity"+row).val()
+	  productquantity= parseInt(productquantity)
+	  
+	  productinventory = $("#"+product+"_inventory"+row).text()
+	  productinventory= parseInt(productinventory)
+	  console.log("productinventory=="+productinventory)
+	   console.log("productinventory=="+productquantity)
+	  var quantityleft = productinventory - productquantity
+	  console.log("quantityleft=="+quantityleft)
+	  $("#"+product+"_inventory"+row).empty()
+	  $("#"+product+"_inventory"+row).append(quantityleft)
+	  
+	  totalproductprice = productprice * productquantity
+	  checkoutPrice = checkoutPrice + totalproductprice;
+	  console.log(checkoutPrice+","+totalproductprice)
+	  var tableSize = $('#checkoutTable tr').length;
+	  var flag = false;
+	  var itemId;
+	  if(tableSize > 0)
+		  {
+		  console.log("inside not empty")
+	  $("#checkoutTable tr").each(function(){
+		   console.log("checkingsame"+this.id+"productid"+productid)
+		  if (productid === parseInt(this.id))
+			  {
+				flag = true;
+				itemId = this.id;
+
+			  }	
+	  });
+		  if(flag){
+			  console.log("q : " + $("#"+itemId+" td#productquantity").text());
+			  productquantity += parseInt($("#"+itemId+" td#productquantity").text())
+			  totalproductprice += parseInt($("#"+itemId+" td#totalproductprice").text())
+			  	$("#"+itemId+" td#productquantity").text(productquantity)
+			  	$("#"+itemId+" td#totalproductprice").text(totalproductprice)
+		  }else{
+			  console.log("inside else if product is not added")
+			  $("#checkoutTable").append('<tr id = "'+productid+'"><td>'+productname+'</td><td id="productquantity">'+productquantity+'</td><td id="totalproductprice">'+totalproductprice+'</td></tr>')
+		  }
+		  }
+	  else{
+		  console.log("inside empty")
+		  $("#checkoutTable").append('<tr id = "'+productid+'"><td>'+productname+'</td><td id="productquantity">'+productquantity+'</td><td id="totalproductprice">'+totalproductprice+'</td></tr>')
+	  }
+	  $("#checkoutPrice").empty()
+	  $("#checkoutPrice").append('<label>'+checkoutPrice+'</label>')
+	  
+	  
+  }
+
 </script>
   </body>
 </html>
