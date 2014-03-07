@@ -99,7 +99,7 @@
 	
    <!--  Carousel - consult the Twitter Bootstrap docs at 
       http://twitter.github.com/bootstrap/javascript.html#carousel -->
-	  <div id="main_template" style="margin-left: 115px;margin-right: 115px;margin-top:10px">
+	  <div id="main_template" style="margin-left: 115px;margin-right: 84px;margin-top:10px">
 	<div class="panel panel-default" style="width:55%;display:inline-block;box-shadow: 16px 3px 10px -7px #888, -10px 10px 20px -7px #888;">
   <div class="panel-heading">
     <h3 class="panel-title"><span class="glyphicon glyphicon-cutlery"></span>  MENU</h3>
@@ -294,23 +294,23 @@
   </div>
 
   <!-- Table -->
-  <table class="table ">
-        <thead>
+  <table id="checkoutTable" class="table ">
+        <!-- <thead>
           <tr>
             <th>Item Name</th>
             <th>Quantity</th>
             <th>Price <span class="WebRupee">&#x20B9;</span></th>
           </tr>
-        </thead>
-        <tbody id="checkoutTable">
+        </thead> -->
+        <tbody>
+        <tr><td>No items selected</tr>
         </tbody>
       </table>
 
-    <h2 style="display:inline-block"><span class="label label-default" width:"100%">Total : <span class="WebRupee">&#x20B9;</span><span id = "checkoutPrice"></span></span></h2> 
+    <h2 style="display:inline-block"><span class="label label-default">Total : <span class="WebRupee">&#x20B9;</span><span id = "checkoutPrice"></span></span></h2> 
     <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#exampleModal" style="float:right;margin-top:15px">
   Checkout
 </button>
-</div>
 </div>
 </div>
 <!-- CONFIRMING MODAL FOR CHECKOUT -->
@@ -329,7 +329,7 @@
 
       <!-- FOOTER -->
       <footer>
-       <p style="padding-left:8%">&copy; 2014 Company, Inc. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
+       <p style="padding-left:8%; display:none">&copy; 2014 Company, Inc. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
       </footer>
 
     </div><!-- /.container -->
@@ -356,25 +356,6 @@
   $(this).tab('show')
 })
 var checkoutPrice = 0
-function onlyNumber(input)
-  {
-	  
-	  $(input).keydown(function (e) {
-	        // Allow: backspace, delete, tab, escape, enter and .
-	        if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 190]) !== -1 ||
-	             // Allow: Ctrl+A
-	            (e.keyCode == 65 && e.ctrlKey === true) || 
-	             // Allow: home, end, left, right
-	            (e.keyCode >= 35 && e.keyCode <= 39)) {
-	                 // let it happen, don't do anything
-	                 return;
-	        }
-	        // Ensure that it is a number and stop the keypress
-	        if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
-	            e.preventDefault();
-	        }
-	    });
-  }
 
 function productClick(product,row)
   {
@@ -423,13 +404,17 @@ function productClick(product,row)
 	  totalproductprice = productprice * productquantity
 	  checkoutPrice = checkoutPrice + totalproductprice;
 	  console.log(checkoutPrice+","+totalproductprice)
-	  var tableSize = $('#checkoutTable tr').length;
+	  
+/* <-----------code to correctly fill out checking cart----------------------> */
+	  var tableSize = $('#checkoutbody tr').length;
+	  console.log("tableSize=="+tableSize)
 	  var flag = false;
 	  var itemId;
-	  if(tableSize > 0)
+	 
+	  if(tableSize >= 1)
 		  {
 		  console.log("inside not empty")
-	  $("#checkoutTable tr").each(function(){
+	  $("#checkoutbody tr").each(function(){
 		   console.log("checkingsame"+this.id+"productid"+productid)
 		  if (productid === parseInt(this.id))
 			  {
@@ -446,19 +431,41 @@ function productClick(product,row)
 			  	$("#"+itemId+" td#totalproductprice").text(totalproductprice)
 		  }else{
 			  console.log("inside else if product is not added")
-			  $("#checkoutTable").append('<tr id = "'+productid+'"><td>'+productname+'</td><td id="productquantity">'+productquantity+'</td><td id="totalproductprice">'+totalproductprice+'</td></tr>')
+			  $("#checkoutbody").append('<tr id = "'+productid+'"><td>'+productname+'</td><td id="productquantity">'+productquantity+'</td><td id="totalproductprice">'+totalproductprice+'</td></tr>')
 		  }
 		  }
 	  else{
 		  console.log("inside empty")
-		  $("#checkoutTable").append('<tr id = "'+productid+'"><td>'+productname+'</td><td id="productquantity">'+productquantity+'</td><td id="totalproductprice">'+totalproductprice+'</td></tr>')
+		  $("#checkoutTable").empty();
+		  $("#checkoutTable").append('<thead><tr><th>Item Name</th><th>Quantity</th><th>Price<span class="WebRupee">&#x20B9;</span></th></tr></thead><tbody id="checkoutbody"><tr id = "'+productid+'"><td>'+productname+'</td><td id="productquantity">'+productquantity+'</td><td id="totalproductprice">'+totalproductprice+'</td></tr>')
 	  }
 	  $("#checkoutPrice").empty()
 	  $("#checkoutPrice").append('<label>'+checkoutPrice+'</label>')
 	  
 	  
   }
-
+  
+  
+/* <-------function to ensure only numbers can be input to quantity----------> */
+  function onlyNumber(input)
+  {
+	  
+	  $(input).keydown(function (e) {
+	        // Allow: backspace, delete, tab, escape, enter and .
+	        if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 190]) !== -1 ||
+	             // Allow: Ctrl+A
+	            (e.keyCode == 65 && e.ctrlKey === true) || 
+	             // Allow: home, end, left, right
+	            (e.keyCode >= 35 && e.keyCode <= 39)) {
+	                 // let it happen, don't do anything
+	                 return;
+	        }
+	        // Ensure that it is a number and stop the keypress
+	        if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+	            e.preventDefault();
+	        }
+	    });
+  }
 </script>
   </body>
 </html>
