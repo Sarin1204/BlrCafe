@@ -20,9 +20,23 @@
 		right: -30%;
 	
 	}
+	.topClass{
+		z-index:1050!important;
+	}
 	 td { text-align:center; vertical-align:middle; }
 	 
 	 th { text-align:center!important; vertical-align:middle; }
+	 
+	 #containerDiv {
+  width: 35%;
+/* height: 200px; */
+/* background: blue; */
+position: absolute;
+top: 9.5%;
+left: 66.5%;
+margin: 0 0 0 -100px;
+	 
+	 
 	</style>
     <title>BLR-Cafe</title>
 
@@ -306,8 +320,8 @@
 </div>
 
 </div>
-
-<div class="panel panel-primary" style="float:right;width:40%;border-color: rgb(168, 168, 235);box-shadow: 16px 3px 10px -7px #888, -10px 10px 20px -7px #888;">
+<div id="containerDiv">
+<div class="panel panel-primary" style="float:right;width:100%;border-color: rgb(168, 168, 235);box-shadow: 16px 3px 10px -7px #888, -10px 10px 20px -7px #888;">
 <div class="panel-heading"><span class="glyphicon glyphicon-shopping-cart"></span>  Checkout Cart</div>
   <div class="panel-body">
     <p id="panelBody" class="panelbodyclass">No items selected</p>
@@ -326,14 +340,16 @@
         </tbody>
       </table>
 
-    <h2 style="display:inline-block"><span class="label label-default">Total : <span class="WebRupee">&#x20B9;</span><span id = "checkoutPrice"></span></span></h2> 
-    <button class="btn btn-primary btn-lg" data-toggle="modal" onclick="validateCheckout()" style="float:right;margin-top:15px">
+    <h1 style="display:inline-block; position: relative;top: -20px;"><span class="label label-default label-large">Total : <span class="WebRupee">&#x20B9;</span><span id = "checkoutPrice"></span></span></h2>
+    <div style="float:right;margin-left:5px;" id="backButton"></div>
+    <button id="checkoutButton" class="btn btn-success btn-lg" data-toggle="modal" onclick="validateCheckout()" style="float:right";margin-top:15px;">
   Checkout
 </button>
 </div>
 </div>
+</div>
 <!-- CONFIRMING MODAL FOR CHECKOUT -->
-<div id="exampleModal" class="modal fade in bs-example-modal-sm" style="display: none;margin-top:auto;margin-bottom:auto; ">  
+<div id="confirmModal" class="modal fade in bs-example-modal-sm" style="display: none;margin-top:auto;margin-bottom:auto; ">  
 <div class="modal-header">  
 <a class="close" onclick="disappearModal()" data-dismiss="modal">x</a>  
 <h3>Are you sure ?</h3>  
@@ -497,13 +513,39 @@ function productClick(product,row)
 		  	$("#modalError").modal('show')
 		  }
 	  else{
-		  $("#exampleModal").css("display","block");
+		  /* $("#confirmModal").css("display","block"); */
+			    var confirmDiv = $('#containerDiv');
+		  		confirmDiv.addClass("topClass");
+		  		$("#checkoutButton").empty()
+		  		$("#checkoutButton").addClass("btn btn-success")
+		  		$("#checkoutButton").append("Confirm")
+		  		var position = confirmDiv.position();
+		  		left=position.left;
+		  		top=position.top
+		  		$("#backButton").append('<button type="button style="float:right;margin-top:15px;" onclick="disappearModal(left,top)" class="btn btn-danger  btn-lg">Back</button>')
+			    confirmDiv.fadeIn().animate({top: $(window).height()/2 - confirmDiv.outerHeight()/2-110,left:$(window).width()/2 - confirmDiv.outerWidth()/2+100}, {duration: 'slow', queue: false}, function() {
+			        //Animation complete.
+			    });
+			    $('body').append('<div id="containerModal"><div class="modal-backdrop fade in"></div></div>')
+			
+		  
 	  }
 	  
   }
-  function disappearModal()
+  function disappearModal(left,top)
   {
-	  $("#exampleModal").css("display","none");
+	  var confirmDiv = $('#containerDiv');
+	  console.log("inside disappear")
+	  $("#backButton").empty()
+	  $("#checkoutButton").empty()
+		  		$("#checkoutButton").addClass("btn btn-success")
+		  		$("#checkoutButton").append("Checkout")
+	  /* $("#confirmModal").css("display","none"); */
+	  confirmDiv.fadeIn().animate({top: top,left:left}, {duration: 'slow', queue: false}, function() {
+	        //Animation complete.
+	    });
+	  $("#containerModal").remove()
+	  
   }
 </script>
   </body>

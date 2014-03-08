@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib import admin
 from CafeProject import settings
+from uuidfield import UUIDField
 
 # Create your models here.
 class User(models.Model):
@@ -30,6 +31,7 @@ class Product(models.Model):
         return self.name
 
 class Transaction(models.Model):
+    orderid = UUIDField(auto=True)
     empid = models.ForeignKey(User)
     productid = models.ForeignKey(Product)
     time = models.DateTimeField()
