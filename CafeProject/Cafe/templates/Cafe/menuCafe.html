@@ -535,8 +535,36 @@ function productClick(product,row)
   }
   function confirm()
   {
-	  alert("inside confirm")
+	  var productIds = []
+	 
+	  $("#checkoutbody tr").each(function(){
+		   console.log("checkingsame"+this.id+"productid"+productid)
+		   var productObject={};
+		   productObject['productId']=this.id
+		   $(this).find('td#productquantity').each (function() {
+			   productObject['quantity']=$(this).text()
+});
+		   productIds.push(productObject);
+		 
+	  });
+	  console.log("Productids==="+JSON.stringify(productIds));
+	  empid = localStorage.getItem("userid");
+	  $.post("order",
+			    {	empid: empid,
+  	  				productIds: JSON.stringify(productIds),
+			     csrfmiddlewaretoken:'{{ csrf_token }}'
+			     },
+			    function(data,status){
+			    	 console.log("Data: " + data + "\nStatus: " + status);
+			    	 alert(data);
+			     })
+			     .fail(function(xhr) {
+				        console.log("Error: " + xhr.statusText);
+				    });
+				    return false;
   }
+  
+  
   function disappearModal(left,top)
   {
 	  var confirmDiv = $('#containerDiv');
