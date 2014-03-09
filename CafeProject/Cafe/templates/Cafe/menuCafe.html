@@ -340,7 +340,7 @@ margin: 0 0 0 -100px;
         </tbody>
       </table>
 
-    <h1 style="display:inline-block; position: relative;top: -20px;"><span class="label label-default label-large">Total : <span class="WebRupee">&#x20B9;</span><span id = "checkoutPrice"></span></span></h2>
+    <h1 style="display:inline-block; position: relative;top: -20px;"><span class="label label-default label-large">Total : <span class="WebRupee">&#x20B9;</span><span id = "checkoutPrice"></span></span></h1>
     <div style="float:right;margin-left:5px;" id="backButton"></div>
     <button id="checkoutButton" class="btn btn-success btn-lg" data-toggle="modal" onclick="validateCheckout()" style="float:right";margin-top:15px;">
   Checkout
@@ -518,6 +518,7 @@ function productClick(product,row)
 		  		confirmDiv.addClass("topClass");
 		  		$("#checkoutButton").empty()
 		  		$("#checkoutButton").addClass("btn btn-success")
+		  		$("#checkoutButton").attr("onclick","confirm()")
 		  		$("#checkoutButton").append("Confirm")
 		  		var position = confirmDiv.position();
 		  		left=position.left;
@@ -532,6 +533,10 @@ function productClick(product,row)
 	  }
 	  
   }
+  function confirm()
+  {
+	  alert("inside confirm")
+  }
   function disappearModal(left,top)
   {
 	  var confirmDiv = $('#containerDiv');
@@ -539,6 +544,7 @@ function productClick(product,row)
 	  $("#backButton").empty()
 	  $("#checkoutButton").empty()
 		  		$("#checkoutButton").addClass("btn btn-success")
+		  		$("#checkoutButton").attr("onclick","validateCheckout()")
 		  		$("#checkoutButton").append("Checkout")
 	  /* $("#confirmModal").css("display","none"); */
 	  confirmDiv.fadeIn().animate({top: top,left:left}, {duration: 'slow', queue: false}, function() {
