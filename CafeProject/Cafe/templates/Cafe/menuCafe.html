@@ -13,6 +13,30 @@
 		border-color: #ebccd1;
 		color: #a94442;
 	}
+	.panelbodyclass{
+		font-size:20px;
+		font-weight:bold;
+		position: relative;
+		right: -30%;
+	
+	}
+	.topClass{
+		z-index:1050!important;
+	}
+	 td { text-align:center; vertical-align:middle; }
+	 
+	 th { text-align:center!important; vertical-align:middle; }
+	 
+	 #containerDiv {
+  width: 35%;
+/* height: 200px; */
+/* background: blue; */
+position: absolute;
+top: 9.5%;
+left: 66.5%;
+margin: 0 0 0 -100px;
+	 
+	 
 	</style>
     <title>BLR-Cafe</title>
 
@@ -36,7 +60,7 @@
   <body background="{% static 'Cafe/img/background.png' %}" style="background-repeat: no-repeat;">
  <!--  Error message popup code -->
   <div class="container">  
-<div id="modalError" class="colorclass modal fade in" style="display: none; ">  
+<div id="modalError" class="colorclass modal fade in" style="display: none;margin-top:auto;margin-bottom:auto; ">  
 <div class="modal-header">  
 <a class="close" data-dismiss="modal">x</a>  
 <h3>Error</h3>
@@ -99,7 +123,7 @@
 	
    <!--  Carousel - consult the Twitter Bootstrap docs at 
       http://twitter.github.com/bootstrap/javascript.html#carousel -->
-	  <div id="main_template" style="margin-left: 115px;margin-right: 115px;margin-top:10px">
+	  <div id="main_template" style="margin-left: 115px;margin-right: 84px;margin-top:10px">
 	<div class="panel panel-default" style="width:55%;display:inline-block;box-shadow: 16px 3px 10px -7px #888, -10px 10px 20px -7px #888;">
   <div class="panel-heading">
     <h3 class="panel-title"><span class="glyphicon glyphicon-cutlery"></span>  MENU</h3>
@@ -121,7 +145,8 @@
   <table class="table table-hover">
   <thead>
     <tr>
-      <th width="70"># Left</th>
+      <th width="70">Stock</th>
+      <th></th>
       <th width="500">Item Name</th>
       <th width="150">Price <span class="WebRupee">&#x20B9;</span></th>
       <th width="100">Quantity</th>
@@ -133,8 +158,9 @@
     <div style="display:none" id="chip_id{{ forloop.counter }}">{{ chip.id }}</div>
     <tr>
         <td><span id="chip_inventory{{ forloop.counter }}" class="badge">{{ chip.inventory }}</span></td>
-        <td id = "chip_name{{ forloop.counter }}">{{ chip.name }}</td>
-        <td id = "chip_price{{ forloop.counter }}" align="right">{{ chip.price }}</td>
+        <td id = "chip_photo{{ forloop.counter }}"><img width=100 height=100 src="{{ chip.photo.url }}"></img></td>
+        <td id = "chip_name{{ forloop.counter }}">{{ chip.name }}</td>    
+        <td id = "chip_price{{ forloop.counter }}">{{ chip.price }}</td>
         <td><div class="input-group">
       <input id="chip_quantity{{ forloop.counter }}" type="text" class="form-control" >
       <span class="input-group-btn">
@@ -154,7 +180,8 @@
   <table class="table table-hover">
   <thead>
     <tr>
-      <th width="70"># Left</th>
+      <th width="70">Stock</th>
+      <th></th>
       <th width="500">Item Name</th>
       <th width="150">Price <span class="WebRupee">&#x20B9;</span></th>
       <th width="100">Quantity</th>
@@ -166,6 +193,7 @@
     <div style="display:none" id="biscuit_id{{ forloop.counter }}">{{ biscuit.id }}</div>
     <tr>
         <td><span id="biscuit_inventory{{ forloop.counter }}" class="badge">{{ biscuit.inventory }}</span></td>
+        <td id = "biscuit_photo{{ forloop.counter }}"><img width=100 height=100 src="{{ biscuit.photo.url }}"></img></td>
         <td id="biscuit_name{{ forloop.counter }}">{{ biscuit.name }}</td>
         <td id="biscuit_price{{ forloop.counter }}" align="right">{{ biscuit.price }}</td>
         <td><div class="input-group">
@@ -187,7 +215,8 @@
   <table class="table table-hover">
   <thead>
     <tr>
-      <th width="70"># Left</th>
+      <th width="70">Stock</th>
+      <th></th>
       <th width="500">Item Name</th>
       <th width="150">Price <span class="WebRupee">&#x20B9;</span></th>
       <th width="100">Quantity</th>
@@ -199,6 +228,7 @@
     <div style="display:none" id="chocolate_id{{ forloop.counter }}">{{ chocolate.id }}</div>
     <tr>
         <td><span id="chocolate_inventory{{ forloop.counter }}" class="badge">{{ chocolate.inventory }}</span></td>
+        <td id = "chocolate_photo{{ forloop.counter }}"><img width=100 height=100 src="{{ chocolate.photo.url }}"></img></td>
         <td id="chocolate_name{{ forloop.counter }}" >{{ chocolate.name }}</td>
         <td id="chocolate_price{{ forloop.counter }}" align="right">{{ chocolate.price }}</td>
         <td><div class="input-group">
@@ -220,7 +250,8 @@
   <table class="table table-hover">
   <thead>
     <tr>
-      <th width="70"># Left</th>
+      <th width="70">Stock</th>
+      <th></th>
       <th width="500">Item Name</th>
       <th width="150">Price <span class="WebRupee">&#x20B9;</span></th>
       <th width="100">Quantity</th>
@@ -232,6 +263,7 @@
     <div style="display:none" id="heatneat_id{{ forloop.counter }}">{{ heatneat.id }}</div>
     <tr>
         <td><span id="heatneat_inventory{{ forloop.counter }}" class="badge">{{ heatneat.inventory }}</span></td>
+        <td id = "heatneat_photo{{ forloop.counter }}"><img width=100 height=100 src="{{ heatneat.photo.url }}"></img></td>
         <td id="heatneat_name{{ forloop.counter }}" >{{ heatneat.name }}</td>
         <td id="heatneat_price{{ forloop.counter }}"  align="right">{{ heatneat.price }}</td>
         <td><div class="input-group">
@@ -254,7 +286,8 @@
   <table class="table table-hover">
   <thead>
     <tr>
-      <th width="70"># Left</th>
+      <th width="70">Stock</th>
+      <th></th>
       <th width="500">Item Name</th>
       <th width="150">Price <span class="WebRupee">&#x20B9;</span></th>
       <th width="100">Quantity</th>
@@ -266,6 +299,7 @@
     <div style="display:none" id="beverage_id{{ forloop.counter }}">{{ beverage.id }}</div>
     <tr>
         <td><span id="beverage_inventory{{ forloop.counter }}" class="badge">{{ beverage.inventory }}</span></td>
+        <td id = "beverage_photo{{ forloop.counter }}"><img width=100 height=100 src="{{ beverage.photo.url }}"></img></td>
         <td id="beverage_name{{ forloop.counter }}">{{ beverage.name }}</td>
         <td id="beverage_price{{ forloop.counter }}" align="right">{{ beverage.price }}</td>
         <td><div class="input-group">
@@ -286,16 +320,16 @@
 </div>
 
 </div>
-
-<div class="panel panel-primary" style="float:right;width:40%;border-color: rgb(168, 168, 235);box-shadow: 16px 3px 10px -7px #888, -10px 10px 20px -7px #888;">
+<div id="containerDiv">
+<div class="panel panel-primary" style="float:right;width:100%;border-color: rgb(168, 168, 235);box-shadow: 16px 3px 10px -7px #888, -10px 10px 20px -7px #888;">
 <div class="panel-heading"><span class="glyphicon glyphicon-shopping-cart"></span>  Checkout Cart</div>
   <div class="panel-body">
-    <p>LIST OF ITEMS:</p>
+    <p id="panelBody" class="panelbodyclass">No items selected</p>
   </div>
 
   <!-- Table -->
-  <table class="table ">
-        <thead>
+  <table id="checkoutTable" class="table ">
+        <!-- <thead>
           <tr>
             <th>Item Name</th>
             <th>Quantity</th>
@@ -303,27 +337,28 @@
             <th width="6px"></th>
             
           </tr>
-        </thead>
-        <tbody id="checkoutTable">
+        </thead> -->
+        <tbody>
         </tbody>
       </table>
 
-    <h2 style="display:inline-block"><span class="label label-default" width:"100%">Total : <span class="WebRupee">&#x20B9;</span><span id = "checkoutPrice"></span></span></h2> 
-    <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#exampleModal" style="float:right;margin-top:15px">
+    <h1 style="display:inline-block; position: relative;top: -20px;"><span class="label label-default label-large">Total : <span class="WebRupee">&#x20B9;</span><span id = "checkoutPrice"></span></span></h1>
+    <div style="float:right;margin-left:5px;" id="backButton"></div>
+    <button id="checkoutButton" class="btn btn-success btn-lg" data-toggle="modal" onclick="validateCheckout()" style="float:right";margin-top:15px;">
   Checkout
 </button>
 </div>
 </div>
 </div>
 <!-- CONFIRMING MODAL FOR CHECKOUT -->
-<div id="exampleModal" class="modal fade in bs-example-modal-sm" style="display: none;margin-top:auto;margin-bottom:auto; ">  
+<div id="confirmModal" class="modal fade in bs-example-modal-sm" style="display: none;margin-top:auto;margin-bottom:auto; ">  
 <div class="modal-header">  
-<a class="close" data-dismiss="modal">x</a>  
+<a class="close" onclick="disappearModal()" data-dismiss="modal">x</a>  
 <h3>Are you sure ?</h3>  
 </div>  
   <div class="modal-footer">  
 <input class="submit btn btn-default"  value="Yes"/>
-<a href="#" class="btn  btn-default" data-dismiss="modal">Close</a>  
+<a href="#" class="btn  btn-default" onclick="disappearModal()" data-dismiss="modal">Close</a>  
 
 </div>
 
@@ -331,7 +366,7 @@
 
       <!-- FOOTER -->
       <footer>
-       <p style="padding-left:8%">&copy; 2014 Company, Inc. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
+       <p style="padding-left:8%; display:none">&copy; 2014 Company, Inc. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
       </footer>
 
     </div><!-- /.container -->
@@ -358,25 +393,6 @@
   $(this).tab('show')
 })
 var checkoutPrice = 0
-function onlyNumber(input)
-  {
-	  
-	  $(input).keydown(function (e) {
-	        // Allow: backspace, delete, tab, escape, enter and .
-	        if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 190]) !== -1 ||
-	             // Allow: Ctrl+A
-	            (e.keyCode == 65 && e.ctrlKey === true) || 
-	             // Allow: home, end, left, right
-	            (e.keyCode >= 35 && e.keyCode <= 39)) {
-	                 // let it happen, don't do anything
-	                 return;
-	        }
-	        // Ensure that it is a number and stop the keypress
-	        if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
-	            e.preventDefault();
-	        }
-	    });
-  }
 
 function productClick(product,row)
   {
@@ -425,13 +441,17 @@ function productClick(product,row)
 	  totalproductprice = productprice * productquantity
 	  checkoutPrice = checkoutPrice + totalproductprice;
 	  console.log(checkoutPrice+","+totalproductprice)
-	  var tableSize = $('#checkoutTable tr').length;
+	  
+/* <-----------code to correctly fill out checking cart----------------------> */
+	  var tableSize = $('#checkoutbody tr').length;
+	  console.log("tableSize=="+tableSize)
 	  var flag = false;
 	  var itemId;
+	 
 	  if(tableSize > 0)
 		  {
 		  console.log("inside not empty")
-	  $("#checkoutTable tr").each(function(){
+	  $("#checkoutbody tr").each(function(){
 		   console.log("checkingsame"+this.id+"productid"+productid)
 		  if (productid === parseInt(this.id))
 			  {
@@ -453,6 +473,8 @@ function productClick(product,row)
 		  }
 	  else{
 		  console.log("inside empty")
+		  $("#panelBody").empty();
+		  $("#panelBody").append("Items Selected");
 		  $("#checkoutTable").append('<tr id = "'+productid+'"><td>'+productname+'</td><td id="productquantity">'+productquantity+'</td><td id="totalproductprice">'+totalproductprice+'</td><td><button type="button" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-remove"></span></button></td></tr>')
 	  }
 	  $("#checkoutPrice").empty()
@@ -460,7 +482,107 @@ function productClick(product,row)
 	  
 	  
   }
-
+  
+  
+/* <-------function to ensure only numbers can be input to quantity----------> */
+  function onlyNumber(input)
+  {
+	  
+	  $(input).keydown(function (e) {
+	        // Allow: backspace, delete, tab, escape, enter and .
+	        if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 190]) !== -1 ||
+	             // Allow: Ctrl+A
+	            (e.keyCode == 65 && e.ctrlKey === true) || 
+	             // Allow: home, end, left, right
+	            (e.keyCode >= 35 && e.keyCode <= 39)) {
+	                 // let it happen, don't do anything
+	                 return;
+	        }
+	        // Ensure that it is a number and stop the keypress
+	        if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+	            e.preventDefault();
+	        }
+	    });
+  }
+  function validateCheckout()
+  {
+	  var tableSize = $('#checkoutbody tr').length;
+	  console.log("tableSize=="+tableSize)
+	  if(tableSize <= 0)
+		  {
+		  $("#errormessage").empty()
+		  	$("#errormessage").append("Cart is empty")
+		  	$("#modalError").modal('show')
+		  }
+	  else{
+		  /* $("#confirmModal").css("display","block"); */
+			    var confirmDiv = $('#containerDiv');
+		  		confirmDiv.addClass("topClass");
+		  		$("#checkoutButton").empty()
+		  		$("#checkoutButton").addClass("btn btn-success")
+		  		$("#checkoutButton").attr("onclick","confirm()")
+		  		$("#checkoutButton").append("Confirm")
+		  		var position = confirmDiv.position();
+		  		left=position.left;
+		  		top=position.top
+		  		$("#backButton").append('<button type="button style="float:right;margin-top:15px;" onclick="disappearModal(left,top)" class="btn btn-danger  btn-lg">Back</button>')
+			    confirmDiv.fadeIn().animate({top: $(window).height()/2 - confirmDiv.outerHeight()/2-110,left:$(window).width()/2 - confirmDiv.outerWidth()/2+100}, {duration: 'slow', queue: false}, function() {
+			        //Animation complete.
+			    });
+			    $('body').append('<div id="containerModal"><div class="modal-backdrop fade in"></div></div>')
+			
+		  
+	  }
+	  
+  }
+  function confirm()
+  {
+	  var productIds = []
+	 
+	  $("#checkoutbody tr").each(function(){
+		   console.log("checkingsame"+this.id+"productid"+productid)
+		   var productObject={};
+		   productObject['productId']=this.id
+		   $(this).find('td#productquantity').each (function() {
+			   productObject['quantity']=$(this).text()
+});
+		   productIds.push(productObject);
+		 
+	  });
+	  console.log("Productids==="+JSON.stringify(productIds));
+	  empid = localStorage.getItem("userid");
+	  $.post("order",
+			    {	empid: empid,
+  	  				productIds: JSON.stringify(productIds),
+			     csrfmiddlewaretoken:'{{ csrf_token }}'
+			     },
+			    function(data,status){
+			    	 console.log("Data: " + data + "\nStatus: " + status);
+			    	 alert(data);
+			     })
+			     .fail(function(xhr) {
+				        console.log("Error: " + xhr.statusText);
+				    });
+				    return false;
+  }
+  
+  
+  function disappearModal(left,top)
+  {
+	  var confirmDiv = $('#containerDiv');
+	  console.log("inside disappear")
+	  $("#backButton").empty()
+	  $("#checkoutButton").empty()
+		  		$("#checkoutButton").addClass("btn btn-success")
+		  		$("#checkoutButton").attr("onclick","validateCheckout()")
+		  		$("#checkoutButton").append("Checkout")
+	  /* $("#confirmModal").css("display","none"); */
+	  confirmDiv.fadeIn().animate({top: top,left:left}, {duration: 'slow', queue: false}, function() {
+	        //Animation complete.
+	    });
+	  $("#containerModal").remove()
+	  
+  }
 </script>
   </body>
 </html>

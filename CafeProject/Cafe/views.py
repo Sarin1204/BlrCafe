@@ -3,8 +3,11 @@ from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from Cafe.models import User
 from Cafe.models import Product
+from Cafe.models import Transaction
 from django.template import RequestContext, loader
 import json
+import datetime
+from uuidfield import UUIDField
 # Create your views here.
 def index(request):
     return render(request, 'Cafe/index.html')
@@ -17,6 +20,7 @@ def menu(request):
     heatneat_list=[]
     for e in Product.objects.filter(type='Chips'):
         if e.inventory != 0:
+            print("photourl==",e.photo.url)
             chips_list.append(e)
     for e in Product.objects.filter(type='Beverages'):
         if e.inventory != 0:
@@ -67,3 +71,27 @@ def signin(request):
                     }
         data = json.dumps(userJson)
         return HttpResponse(data, mimetype='application/json')
+
+def order(request):
+    print(request.POST)
+    empid = request.POST['empid']
+    productIds = request.POST['productIds']
+    print("empid===",empid)
+    print("productIds===",productIds)
+    print(type(productIds))
+    productIds = json.loads(productIds)
+    for product in productIds:
+        print("product===",product)
+        print(type(product))
+        print('productid==',product['productId'])
+        user = User.objects.get(empid=empid)
+    orderid = UUIDField()
+    time=datetime.datetime.now()
+    for product in productIds:
+        productObject = Product.objects.get(id=product['productId'])
+        newTransaction = Transaction(orderid=orderid,empid=user,productid=productObject,time=time,quantity=product['quantity']) 
+        newTransaction.save()
+        newQuantity = productObject.inventory - int(product['quantity'])
+        productObject.inventory = newQuantity
+        productObject.save() 
+    return HttpResponse("True")

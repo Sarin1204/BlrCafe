@@ -10,6 +10,7 @@ https://docs.djangoproject.com/en/1.6/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
+import os.path
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 
@@ -38,7 +39,13 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'Cafe',
 )
-
+SITE_ROOT = os.path.dirname(os.path.realpath(__file__))
+print("SR====",SITE_ROOT)
+MEDIA_ROOT = (
+     os.path.join(SITE_ROOT, "media")  
+)
+MEDIA_URL = '/media/'
+print("MR====",MEDIA_ROOT)
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
