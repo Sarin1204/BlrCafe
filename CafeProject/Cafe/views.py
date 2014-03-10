@@ -85,6 +85,8 @@ def order(request):
         print(type(product))
         print('productid==',product['productId'])
         user = User.objects.get(empid=empid)
+        if user.credits < 1:
+            return HttpResponse("False")
     orderid = UUIDField()
     time=datetime.datetime.now()
     for product in productIds:
@@ -93,5 +95,6 @@ def order(request):
         newTransaction.save()
         newQuantity = productObject.inventory - int(product['quantity'])
         productObject.inventory = newQuantity
-        productObject.save() 
+        productObject.save()
+         
     return HttpResponse("True")
