@@ -23,7 +23,7 @@
 	.topClass{
 		z-index:1050!important;
 	}
-	 td { text-align:center; vertical-align:middle; }
+	 td { text-align:left; vertical-align:middle; }
 	 
 	 th { text-align:center!important; vertical-align:middle; }
 	 
@@ -156,15 +156,15 @@ margin: 0 0 0 -100px;
   {% if chips_list %}
     {% for chip in chips_list %}
     <div style="display:none" id="chip_id{{ forloop.counter }}">{{ chip.id }}</div>
-    <tr>
-        <td><span id="chip_inventory{{ forloop.counter }}" class="badge">{{ chip.inventory }}</span></td>
-        <td id = "chip_photo{{ forloop.counter }}"><img width=100 height=100 src="{{ chip.photo.url }}"></img></td>
-        <td id = "chip_name{{ forloop.counter }}">{{ chip.name }}</td>    
-        <td id = "chip_price{{ forloop.counter }}">{{ chip.price }}</td>
+    <tr id="chip_{{ chip.id }}">
+        <td><span id="menu_inventory_{{ chip.id }}" class="badge">{{ chip.inventory }}</span></td>
+        <td id = "menu_photo_{{ chip.id }}"><img width=100 height=100 src="{{ chip.photo.url }}"></img></td>
+        <td id = "menu_name_{{ chip.id }}">{{ chip.name }}</td>    
+        <td id = "menu_price_{{ chip.id }}">{{ chip.price }}</td>
         <td><div class="input-group">
-      <input id="chip_quantity{{ forloop.counter }}" type="text" class="form-control" >
+      <input id="menu_quantity_{{ chip.id }}" type="text" class="form-control" >
       <span class="input-group-btn">
-        <button onclick="productClick('chip',{{ forloop.counter }})" class="btn btn-default" type="button"><span class="glyphicon glyphicon-plus"></span></button>
+        <button onclick="productClick('chip',{{ chip.id }})" class="btn btn-default" type="button"><span class="glyphicon glyphicon-plus"></span></button>
       </span>
     </div></td>
        </tr>
@@ -191,15 +191,15 @@ margin: 0 0 0 -100px;
   {% if biscuits_list %}
     {% for biscuit in biscuits_list %}
     <div style="display:none" id="biscuit_id{{ forloop.counter }}">{{ biscuit.id }}</div>
-    <tr>
-        <td><span id="biscuit_inventory{{ forloop.counter }}" class="badge">{{ biscuit.inventory }}</span></td>
-        <td id = "biscuit_photo{{ forloop.counter }}"><img width=100 height=100 src="{{ biscuit.photo.url }}"></img></td>
-        <td id="biscuit_name{{ forloop.counter }}">{{ biscuit.name }}</td>
-        <td id="biscuit_price{{ forloop.counter }}" align="right">{{ biscuit.price }}</td>
+    <tr id="biscuit_{{ biscuit.id }}">
+        <td><span id="menu_inventory_{{ biscuit.id }}" class="badge">{{ biscuit.inventory }}</span></td>
+        <td id = "menu_photo_{{ biscuit.id }}"><img width=100 height=100 src="{{ biscuit.photo.url }}"></img></td>
+        <td id="menu_name_{{ biscuit.id }}">{{ biscuit.name }}</td>
+        <td id="menu_price_{{ biscuit.id }}" align="right">{{ biscuit.price }}</td>
         <td><div class="input-group">
-      <input id="biscuit_quantity{{ forloop.counter }}" type="text" class="form-control" >
+      <input id="menu_quantity_{{ biscuit.id }}" type="text" class="form-control" >
       <span class="input-group-btn">
-        <button onclick="productClick('biscuit',{{ forloop.counter }})" class="btn btn-default" type="button"><span class="glyphicon glyphicon-plus"></span></button>
+        <button onclick="productClick('biscuit',{{ biscuit.id }})" class="btn btn-default" type="button"><span class="glyphicon glyphicon-plus"></span></button>
       </span>
     </div></td>
        </tr>
@@ -226,15 +226,15 @@ margin: 0 0 0 -100px;
   {% if chocolates_list %}
     {% for chocolate in chocolates_list %}
     <div style="display:none" id="chocolate_id{{ forloop.counter }}">{{ chocolate.id }}</div>
-    <tr>
-        <td><span id="chocolate_inventory{{ forloop.counter }}" class="badge">{{ chocolate.inventory }}</span></td>
-        <td id = "chocolate_photo{{ forloop.counter }}"><img width=100 height=100 src="{{ chocolate.photo.url }}"></img></td>
-        <td id="chocolate_name{{ forloop.counter }}" >{{ chocolate.name }}</td>
-        <td id="chocolate_price{{ forloop.counter }}" align="right">{{ chocolate.price }}</td>
+    <tr id="chocolate_{{ chocolate.id }}">
+        <td><span id="menu_inventory_{{ chocolate.id }}" class="badge">{{ chocolate.inventory }}</span></td>
+        <td id = "menu_photo_{{ chocolate.id }}"><img width=100 height=100 src="{{ chocolate.photo.url }}"></img></td>
+        <td id="menu_name_{{ chocolate.id }}" >{{ chocolate.name }}</td>
+        <td id="menu_price_{{ chocolate.id }}" align="right">{{ chocolate.price }}</td>
         <td><div class="input-group">
-      <input id="chocolate_quantity{{ forloop.counter }}" type="text" class="form-control" >
+      <input id="menu_quantity_{{ chocolate.id }}" type="text" class="form-control" >
       <span class="input-group-btn">
-        <button onclick="productClick('chocolate',{{ forloop.counter }})" class="btn btn-default" type="button"><span class="glyphicon glyphicon-plus"></span></button>
+        <button onclick="productClick('chocolate',_{{ chocolate.id }})" class="btn btn-default" type="button"><span class="glyphicon glyphicon-plus"></span></button>
       </span>
     </div></td>
        </tr>
@@ -261,15 +261,15 @@ margin: 0 0 0 -100px;
   {% if heatneat_list %}
     {% for heatneat in heatneat_list %}
     <div style="display:none" id="heatneat_id{{ forloop.counter }}">{{ heatneat.id }}</div>
-    <tr>
-        <td><span id="heatneat_inventory{{ forloop.counter }}" class="badge">{{ heatneat.inventory }}</span></td>
-        <td id = "heatneat_photo{{ forloop.counter }}"><img width=100 height=100 src="{{ heatneat.photo.url }}"></img></td>
-        <td id="heatneat_name{{ forloop.counter }}" >{{ heatneat.name }}</td>
-        <td id="heatneat_price{{ forloop.counter }}"  align="right">{{ heatneat.price }}</td>
+    <tr id="heatneat_{{ heatneat.id }}">
+        <td><span id="menu_inventory_{{ heatneat.id }}" class="badge">{{ heatneat.inventory }}</span></td>
+        <td id = "menu_photo_{{ heatneat.id }}"><img width=100 height=100 src="{{ heatneat.photo.url }}"></img></td>
+        <td id="menu_name_{{ heatneat.id }}" >{{ heatneat.name }}</td>
+        <td id="menu_price_{{ heatneat.id }}"  align="right">{{ heatneat.price }}</td>
         <td><div class="input-group">
-      <input id="heatneat_quantity{{ forloop.counter }}" type="text" class="form-control" >
+      <input id="menu_quantity_{{ heatneat.id }}" type="text" class="form-control" >
       <span class="input-group-btn">
-        <button onclick="productClick('heatneat',{{ forloop.counter }})" class="btn btn-default" type="button"><span class="glyphicon glyphicon-plus"></span></button>
+        <button onclick="productClick('heatneat',{{ heatneat.id }})" class="btn btn-default" type="button"><span class="glyphicon glyphicon-plus"></span></button>
       </span>
     </div></td>
        </tr>
@@ -297,15 +297,15 @@ margin: 0 0 0 -100px;
   {% if beverages_list %}
     {% for beverage in beverages_list %}
     <div style="display:none" id="beverage_id{{ forloop.counter }}">{{ beverage.id }}</div>
-    <tr>
-        <td><span id="beverage_inventory{{ forloop.counter }}" class="badge">{{ beverage.inventory }}</span></td>
-        <td id = "beverage_photo{{ forloop.counter }}"><img width=100 height=100 src="{{ beverage.photo.url }}"></img></td>
-        <td id="beverage_name{{ forloop.counter }}">{{ beverage.name }}</td>
-        <td id="beverage_price{{ forloop.counter }}" align="right">{{ beverage.price }}</td>
+    <tr id="beverage_{{ beverage.id }}">
+        <td><span id="menu_inventory_{{ beverage.id }}" class="badge">{{ beverage.inventory }}</span></td>
+        <td id = "menu_photo_{{ beverage.id }}"><img width=100 height=100 src="{{ beverage.photo.url }}"></img></td>
+        <td id="menu_name_{{ beverage.id }}">{{ beverage.name }}</td>
+        <td id="menu_price_{{ beverage.id }}" align="right">{{ beverage.price }}</td>
         <td><div class="input-group">
-      <input id="beverage_quantity{{ forloop.counter }}" type="text" class="form-control" >
+      <input id="menu_quantity_{{ beverage.id }}" type="text" class="form-control" >
       <span class="input-group-btn">
-        <button onclick="productClick('beverage',{{ forloop.counter }})" class="btn btn-default" type="button"><span class="glyphicon glyphicon-plus"></span></button>
+        <button onclick="productClick('beverage',{{ beverage.id }})" class="btn btn-default" type="button"><span class="glyphicon glyphicon-plus"></span></button>
       </span>
     </div></td>
        </tr>
@@ -334,8 +334,6 @@ margin: 0 0 0 -100px;
             <th>Item Name</th>
             <th>Quantity</th>
             <th>Price <span class="WebRupee">&#x20B9;</span></th>
-            <th width="6px"></th>
-            
           </tr>
         </thead> -->
         <tbody>
@@ -394,11 +392,11 @@ margin: 0 0 0 -100px;
 })
 var checkoutPrice = 0
 
-function productClick(product,row)
+function productClick(product,id)
   {
 		console.log("product=="+product)
-		console.log("row=="+row)
-	  if($("#"+product+"_quantity"+row).val().length <= 0)
+		console.log("row=="+id)
+	  if($("#menu_quantity_"+id).val().length <= 0)
 		  {
 		  	console.log("inside no quantity")
 		  	$("#errormessage").empty()
@@ -406,10 +404,10 @@ function productClick(product,row)
 		  	$("#modalError").modal('show')
 		  	return
 		  }
-		 productquantity = $("#"+product+"_quantity"+row).val()
+		 productquantity = $("#menu_quantity_"+id).val()
 		  productquantity= parseInt(productquantity)
 		  
-		  productinventory = $("#"+product+"_inventory"+row).text()
+		  productinventory = $("#menu_inventory_"+id).text()
 		  productinventory= parseInt(productinventory)
 	  if(productquantity > productinventory)
 		  {
@@ -419,24 +417,25 @@ function productClick(product,row)
 		  	$("#modalError").modal('show')
 		  	return
 		  }
-	  productid = $("#"+product+"_id"+row).text()
-	  productid = parseInt(productid)
+	 
 	  
-	  productname = $("#"+product+"_name"+row).text()
-	  productprice = $("#"+product+"_price"+row).text()
+	  productid=id;
+	  
+	  productname = $("#menu_name_"+id).text()
+	  productprice = $("#menu_price_"+id).text()
 	  productprice = parseInt(productprice)
 	  
-	  productquantity = $("#"+product+"_quantity"+row).val()
+	  productquantity = $("#menu_quantity_"+id).val()
 	  productquantity= parseInt(productquantity)
 	  
-	  productinventory = $("#"+product+"_inventory"+row).text()
+	  productinventory = $("#menu_inventory_"+id).text()
 	  productinventory= parseInt(productinventory)
 	  console.log("productinventory=="+productinventory)
 	   console.log("productinventory=="+productquantity)
 	  var quantityleft = productinventory - productquantity
 	  console.log("quantityleft=="+quantityleft)
-	  $("#"+product+"_inventory"+row).empty()
-	  $("#"+product+"_inventory"+row).append(quantityleft)
+	  $("#menu_inventory_"+id).empty()
+	  $("#menu_inventory_"+id).append(quantityleft)
 	  
 	  totalproductprice = productprice * productquantity
 	  checkoutPrice = checkoutPrice + totalproductprice;
@@ -451,31 +450,22 @@ function productClick(product,row)
 	  if(tableSize > 0)
 		  {
 		  console.log("inside not empty")
-	  $("#checkoutbody tr").each(function(){
-		   console.log("checkingsame"+this.id+"productid"+productid)
-		  if (productid === parseInt(this.id))
-			  {
-				flag = true;
-				itemId = this.id;
-
-			  }	
-	  });
-		  if(flag){
-			  console.log("q : " + $("#"+itemId+" td#productquantity").text());
-			  productquantity += parseInt($("#"+itemId+" td#productquantity").text())
-			  totalproductprice += parseInt($("#"+itemId+" td#totalproductprice").text())
-			  	$("#"+itemId+" td#productquantity").text(productquantity)
-			  	$("#"+itemId+" td#totalproductprice").text(totalproductprice)
+		  if($("#cart_"+productid).val()!= undefined ){
+			  console.log("q : " + $("#cart-quantity_"+productid).text());
+			  productquantity += parseInt($("#cart-quantity_"+productid).text())
+			  totalproductprice += parseInt($("#cart-total-price_"+productid).text())
+			  	$("#cart-quantity_"+productid).text(productquantity)
+			  	$("#cart-total-price_"+productid).text(totalproductprice)
 		  }else{
 			  console.log("inside else if product is not added")
-			  $("#checkoutTable").append('<tr id = "'+productid+'"><td>'+productname+'</td><td id="productquantity">'+productquantity+'</td><td id="totalproductprice">'+totalproductprice+'</td><td><button type="button" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-remove"></span></button></td></tr>')
+			  $("#checkoutbody").append('<tr id = "cart_'+productid+'"><td>'+productname+'</td><td id="cart-quantity_'+productid+'">'+productquantity+'</td><td id="cart-total-price_'+productid+'">'+totalproductprice+'</td><td><button type="button" onclick="removeCartItem(this)" id="remove_'+productid+'" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-remove"></span></button></td></tr>')
 		  }
 		  }
 	  else{
 		  console.log("inside empty")
 		  $("#panelBody").empty();
 		  $("#panelBody").append("Items Selected");
-		  $("#checkoutTable").append('<tr id = "'+productid+'"><td>'+productname+'</td><td id="productquantity">'+productquantity+'</td><td id="totalproductprice">'+totalproductprice+'</td><td><button type="button" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-remove"></span></button></td></tr>')
+		  $("#checkoutTable").append('<thead id="cartHead"><tr><th>Item Name</th><th>Quantity</th><th>Price<span class="WebRupee">&#x20B9;</span></th><th></th></tr></thead><tbody id="checkoutbody"><tr id = "cart_'+productid+'"><td>'+productname+'</td><td id="cart-quantity_'+productid+'">'+productquantity+'</td><td id="cart-total-price_'+productid+'">'+totalproductprice+'</td><td><button type="button" onclick="removeCartItem(this)" id="remove_'+productid+'" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-remove"></span></button></td></tr>')
 	  }
 	  $("#checkoutPrice").empty()
 	  $("#checkoutPrice").append('<label>'+checkoutPrice+'</label>')
@@ -582,6 +572,29 @@ function productClick(product,row)
 	    });
 	  $("#containerModal").remove()
 	  
+  }
+  
+  // Function to remove items from the checkout cart 
+  
+  function removeCartItem(el){
+  
+  		
+  		var productId=$(el).attr('id').split("_")[1];
+  		var cartProductQuant=parseInt($('#cart-quantity_'+productId).text());
+  		var cartProductPrice=parseInt($('#cart-total-price_'+productId).text());
+  		var menuProductQuant=parseInt($("#menu_inventory_"+productId).text());
+  		menuProductQuant+=cartProductQuant;
+  		$("#menu_inventory_"+productId).text(menuProductQuant);
+  		$("#cart_"+productId).remove();
+  		var tableSize = $('#checkoutbody tr').length;
+  		checkoutPrice-=cartProductPrice;
+  		 $("#checkoutPrice").empty()
+	  $("#checkoutPrice").append('<label>'+checkoutPrice+'</label>')
+  		
+  		if(tableSize == 0){
+  			$("#cartHead").remove();
+  		}
+  		
   }
 </script>
   </body>
