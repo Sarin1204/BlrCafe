@@ -300,6 +300,8 @@
             <th>Item Name</th>
             <th>Quantity</th>
             <th>Price <span class="WebRupee">&#x20B9;</span></th>
+            <th width="6px"></th>
+            
           </tr>
         </thead>
         <tbody id="checkoutTable">
@@ -446,12 +448,12 @@ function productClick(product,row)
 			  	$("#"+itemId+" td#totalproductprice").text(totalproductprice)
 		  }else{
 			  console.log("inside else if product is not added")
-			  $("#checkoutTable").append('<tr id = "'+productid+'"><td>'+productname+'</td><td id="productquantity">'+productquantity+'</td><td id="totalproductprice">'+totalproductprice+'</td></tr>')
+			  $("#checkoutTable").append('<tr id = "'+productid+'"><td>'+productname+'</td><td id="productquantity">'+productquantity+'</td><td id="totalproductprice">'+totalproductprice+'</td><td><button type="button" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-remove"></span></button></td></tr>')
 		  }
 		  }
 	  else{
 		  console.log("inside empty")
-		  $("#checkoutTable").append('<tr id = "'+productid+'"><td>'+productname+'</td><td id="productquantity">'+productquantity+'</td><td id="totalproductprice">'+totalproductprice+'</td></tr>')
+		  $("#checkoutTable").append('<tr id = "'+productid+'"><td>'+productname+'</td><td id="productquantity">'+productquantity+'</td><td id="totalproductprice">'+totalproductprice+'</td><td><button type="button" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-remove"></span></button></td></tr>')
 	  }
 	  $("#checkoutPrice").empty()
 	  $("#checkoutPrice").append('<label>'+checkoutPrice+'</label>')
