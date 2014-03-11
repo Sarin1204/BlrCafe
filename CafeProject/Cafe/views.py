@@ -99,3 +99,20 @@ def order(request):
         productObject.save()
          
     return HttpResponse("True")
+def profile(request,userid):
+    print("userid====="+userid)
+    userid = int(userid)
+    user = User.objects.get(empid=userid)
+    transactionList=[]
+    transactionQuery = Transaction.objects.filter(empid=user).order_by('-time')
+    if transactionQuery.exists():
+        print(transactionQuery)
+        for transaction in transactionQuery:
+            transactionList.append(transaction)
+            
+        context = RequestContext(request, {
+        'transaction_list': transactionList
+        })
+    template = loader.get_template('Cafe/profile.html')
+    return HttpResponse(template.render(context))
+    

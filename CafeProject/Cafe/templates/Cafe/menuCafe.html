@@ -94,10 +94,6 @@ margin: 0 0 0 -100px;
            <li><a><strong id="credits">Balance:<span class="WebRupee">&#x20B9;</span></strong></a>
            </li>
 			<li onmouseover="" style="cursor: pointer; position:relative; left:-10px;"><a onClick="logout() "><strong>Log Out</strong></a></li>
-              
-			  
-            
-          </li>
               </ul>
             </div>
           </div>
@@ -588,6 +584,11 @@ function productClick(product,id)
   			$("#cartHead").remove();
   		}
   		
+  }
+  
+  function profile()
+  {
+	  window.location.assign("profile/"+sessionStorage.getItem("userid"))
   }
   
   function logout()
