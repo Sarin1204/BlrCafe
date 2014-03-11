@@ -37,5 +37,6 @@ class Transaction(models.Model):
     productid = models.ForeignKey(Product)
     time = models.DateTimeField()
     quantity = models.IntegerField(max_length=5)
+    totalprice = models.IntegerField(max_length=10)
     def __str__(self):
         return self.empid.name

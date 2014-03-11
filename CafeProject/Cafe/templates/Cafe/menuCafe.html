@@ -331,7 +331,7 @@ margin: 0 0 0 -100px;
 </div>
 </div>
 </div>
-<!-- CONFIRMING MODAL FOR CHECKOUT -->
+<!--  MODAL FOR LOGOUT -->
 <div id="logoutModal" class="modal fade in bs-example-modal-sm" style="display: none;margin-top:auto;margin-bottom:auto; ">  
 <div class="modal-header">  
 <a class="close" onclick="disappearModal()" data-dismiss="modal">x</a>  
@@ -340,10 +340,18 @@ margin: 0 0 0 -100px;
   <!-- <div class="modal-footer">  
 <input class="submit btn btn-default"  value="Yes"/>
 <a href="#" class="btn  btn-default" onclick="disappearModal()" data-dismiss="modal">Close</a>   -->
-
 </div>
-
+<!--  MODAL FOR Checkout Confirmed -->
+<div id="confirmOrderModal" class="modal fade in bs-example-modal-sm" style="display: none;margin-top:auto;margin-bottom:auto; ">  
+<div class="modal-header">  
+<a class="close" onclick="disappearModal()" data-dismiss="modal">x</a>  
+<h3 id="confirmOrderMsg"></h3>
 </div>  
+  <!-- <div class="modal-footer">  
+<input class="submit btn btn-default"  value="Yes"/>
+<a href="#" class="btn  btn-default" onclick="disappearModal()" data-dismiss="modal">Close</a>   -->
+</div>
+ 
 
       <!-- FOOTER -->
       <footer>
@@ -361,7 +369,7 @@ margin: 0 0 0 -100px;
 	<script>
 	if(sessionStorage.getItem("userid") == null)
 	{
-		//window.location.assign("index");
+		window.location.assign("index");
 	}
   $(document).ready(function(){
     $('.carousel').carousel();
@@ -450,7 +458,7 @@ function productClick(product,id)
 			  console.log("inside else if product is not added")
 			  $("#checkoutbody").append('<tr id = "cart_'+productid+'"><td>'+productname+'</td><td id="cart-quantity_'+productid+'">'+productquantity+'</td><td id="cart-total-price_'+productid+'">'+totalproductprice+'</td><td><button type="button" onclick="removeCartItem(this)" id="remove_'+productid+'" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-remove"></span></button></td></tr>')
 			  cartIds.push(productid);
-			  alert(cartIds);
+			  /* alert(cartIds); */
 		  }
 		  }
 	  else{
@@ -459,7 +467,7 @@ function productClick(product,id)
 		  $("#panelBody").append("Items Selected");
 		  $("#checkoutTable").append('<thead id="cartHead"><tr><th>Item Name</th><th>Quantity</th><th>Price<span class="WebRupee">&#x20B9;</span></th><th></th></tr></thead><tbody id="checkoutbody"><tr id = "cart_'+productid+'"><td>'+productname+'</td><td id="cart-quantity_'+productid+'">'+productquantity+'</td><td id="cart-total-price_'+productid+'">'+totalproductprice+'</td><td><button type="button" onclick="removeCartItem(this)" id="remove_'+productid+'" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-remove"></span></button></td></tr>')
 	      cartIds.push(productid);
-	  		alert(cartIds);
+	  		/* alert(cartIds); */
 	  }
 	  $("#checkoutPrice").empty()
 	  $("#checkoutPrice").append('<label>'+checkoutPrice+'</label>')
@@ -530,6 +538,7 @@ function productClick(product,id)
 			var productObject={};
 			productObject['productId']=cartIds[d];
 			productObject['quantity']=$("#cart-quantity_"+cartIds[d]).text();
+			productObject['totalproductprice']=$("#cart-total-price_"+cartIds[d]).text();
 			productIds.push(productObject);
 		}
 	  console.log("Productids==="+JSON.stringify(productIds));
@@ -543,7 +552,24 @@ function productClick(product,id)
 			     },
 			    function(data,status){
 			    	 console.log("Data: " + data + "\nStatus: " + status);
-			    	 alert(data);
+			    	 if(data=="True")
+			    		 {
+			    		 	$("#confirmOrderMsg").empty()
+			    		 	$("#confirmOrderMsg").append("Order Confirmed ")
+			    		 	$("#confirmOrderMsg").append("<img src='{% static 'Cafe/img/ajax-loader.gif' %}'></img>")
+			    		 	$("#confirmOrderModal").css("display","block")
+			    		 	setTimeout(function(){window.location.assign("menucafe")}, 2500);
+			    		 	
+			    		 		
+			    		 }
+			    	 else
+			    		 {
+			    		 	$("#confirmOrderMsg").empty()
+			    		 	$("#confirmOrderMsg").append("Order Failed. Please contact the Admin. ")
+			    		 	$("#confirmOrderMsg").append("<img src='{% static 'Cafe/img/ajax-loader.gif' %}'></img>")
+			    		 	$("#confirmOrderModal").css("display","block")
+			    		 	setTimeout(function(){window.location.assign("menucafe")}, 2500);
+			    		 }
 			     })
 			     .fail(function(xhr) {
 				        console.log("Error: " + xhr.statusText);
@@ -592,7 +618,7 @@ function productClick(product,id)
 		if (index > -1) {
     		cartIds.splice(index, 1);
 		}
-		alert(cartIds);
+		/* alert(cartIds); */
 		
   }
   
