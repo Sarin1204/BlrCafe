@@ -77,17 +77,17 @@ def order(request):
     print(request.POST)
     empid = request.POST['empid']
     productIds = request.POST['productIds']
+    checkoutPrice=request.POST['checkoutPrice']
     print("empid===",empid)
     print("productIds===",productIds)
     print(type(productIds))
     productIds = json.loads(productIds)
-    for product in productIds:
-        print("product===",product)
-        print(type(product))
-        print('productid==',product['productId'])
-        user = User.objects.get(empid=empid)
-        if user.credits < 1:
-            return HttpResponse("False")
+    user = User.objects.get(empid=empid)
+    newBalance=user.credits- int(checkoutPrice)
+    user.credits=newBalance
+    user.save()
+    if user.credits < 1:
+        return HttpResponse("False")
     orderid = UUIDField()
     time=datetime.datetime.now()
     for product in productIds:

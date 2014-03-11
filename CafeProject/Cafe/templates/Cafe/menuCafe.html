@@ -522,6 +522,10 @@ function productClick(product,id)
   function confirm()
   {		
   		var productIds = []
+  		var totalCartPrice=checkoutPrice;
+  		var newPrice=parseInt(sessionStorage.getItem("usercredits"))-totalCartPrice;
+  		sessionStorage.setItem("usercredits",newPrice);
+  		$("#credits").append("Balance:<span class='WebRupee'></span>"+sessionStorage.getItem("usercredits"))
 		for(var d in cartIds){
 			var productObject={};
 			productObject['productId']=cartIds[d];
@@ -530,9 +534,11 @@ function productClick(product,id)
 		}
 	  console.log("Productids==="+JSON.stringify(productIds));
 	  empid = sessionStorage.getItem("userid");
+	  
 	  $.post("order",
 			    {	empid: empid,
   	  				productIds: JSON.stringify(productIds),
+  	  				checkoutPrice:totalCartPrice,
 			     csrfmiddlewaretoken:'{{ csrf_token }}'
 			     },
 			    function(data,status){
