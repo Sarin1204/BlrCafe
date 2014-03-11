@@ -233,7 +233,7 @@ margin: 0 0 0 -100px;
         <td><div class="input-group">
       <input id="menu_quantity_{{ chocolate.id }}" type="text" class="form-control" >
       <span class="input-group-btn">
-        <button onclick="productClick('chocolate',_{{ chocolate.id }})" class="btn btn-default" type="button"><span class="glyphicon glyphicon-plus"></span></button>
+        <button onclick="productClick('chocolate',{{ chocolate.id }})" class="btn btn-default" type="button"><span class="glyphicon glyphicon-plus"></span></button>
       </span>
     </div></td>
        </tr>
@@ -390,6 +390,7 @@ margin: 0 0 0 -100px;
   $(this).tab('show')
 })
 var checkoutPrice = 0
+var cartIds=new Array();
 
 function productClick(product,id)
   {
@@ -458,6 +459,8 @@ function productClick(product,id)
 		  }else{
 			  console.log("inside else if product is not added")
 			  $("#checkoutbody").append('<tr id = "cart_'+productid+'"><td>'+productname+'</td><td id="cart-quantity_'+productid+'">'+productquantity+'</td><td id="cart-total-price_'+productid+'">'+totalproductprice+'</td><td><button type="button" onclick="removeCartItem(this)" id="remove_'+productid+'" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-remove"></span></button></td></tr>')
+			  cartIds.push(productid);
+			  alert(cartIds);
 		  }
 		  }
 	  else{
@@ -465,6 +468,8 @@ function productClick(product,id)
 		  $("#panelBody").empty();
 		  $("#panelBody").append("Items Selected");
 		  $("#checkoutTable").append('<thead id="cartHead"><tr><th>Item Name</th><th>Quantity</th><th>Price<span class="WebRupee">&#x20B9;</span></th><th></th></tr></thead><tbody id="checkoutbody"><tr id = "cart_'+productid+'"><td>'+productname+'</td><td id="cart-quantity_'+productid+'">'+productquantity+'</td><td id="cart-total-price_'+productid+'">'+totalproductprice+'</td><td><button type="button" onclick="removeCartItem(this)" id="remove_'+productid+'" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-remove"></span></button></td></tr>')
+	      cartIds.push(productid);
+	  		alert(cartIds);
 	  }
 	  $("#checkoutPrice").empty()
 	  $("#checkoutPrice").append('<label>'+checkoutPrice+'</label>')
@@ -525,19 +530,14 @@ function productClick(product,id)
 	  
   }
   function confirm()
-  {
-	  var productIds = []
-	 
-	  $("#checkoutbody tr").each(function(){
-		   console.log("checkingsame"+this.id+"productid"+productid)
-		   var productObject={};
-		   productObject['productId']=this.id
-		   $(this).find('td#productquantity').each (function() {
-			   productObject['quantity']=$(this).text()
-});
-		   productIds.push(productObject);
-		 
-	  });
+  {		
+  		var productIds = []
+		for(var d in cartIds){
+			var productObject={};
+			productObject['productId']=cartIds[d];
+			productObject['quantity']=$("#cart-quantity_"+cartIds[d]).text();
+			productIds.push(productObject);
+		}
 	  console.log("Productids==="+JSON.stringify(productIds));
 	  empid = sessionStorage.getItem("userid");
 	  $.post("order",
@@ -588,12 +588,16 @@ function productClick(product,id)
   		var tableSize = $('#checkoutbody tr').length;
   		checkoutPrice-=cartProductPrice;
   		 $("#checkoutPrice").empty()
-	  $("#checkoutPrice").append('<label>'+checkoutPrice+'</label>')
+	    $("#checkoutPrice").append('<label>'+checkoutPrice+'</label>')
   		
   		if(tableSize == 0){
   			$("#cartHead").remove();
-  		}
-  		
+  		}var index = cartIds.indexOf(parseInt(productId));
+		if (index > -1) {
+    		cartIds.splice(index, 1);
+		}
+		alert(cartIds);
+		
   }
   
   function logout()
