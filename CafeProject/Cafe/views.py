@@ -92,7 +92,7 @@ def order(request):
     time=datetime.datetime.now()
     for product in productIds:
         productObject = Product.objects.get(id=product['productId'])
-        newTransaction = Transaction(orderid=orderid,empid=user,productid=productObject,time=time,quantity=product['quantity']) 
+        newTransaction = Transaction(orderid=orderid,empid=user,productid=productObject,time=time,quantity=product['quantity'],totalprice=product['totalproductprice']) 
         newTransaction.save()
         newQuantity = productObject.inventory - int(product['quantity'])
         productObject.inventory = newQuantity

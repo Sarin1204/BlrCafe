@@ -526,6 +526,7 @@ function productClick(product,id)
 			var productObject={};
 			productObject['productId']=cartIds[d];
 			productObject['quantity']=$("#cart-quantity_"+cartIds[d]).text();
+			productObject['totalproductprice']=$("#cart-total-price_"+cartIds[d]).text();
 			productIds.push(productObject);
 		}
 	  console.log("Productids==="+JSON.stringify(productIds));

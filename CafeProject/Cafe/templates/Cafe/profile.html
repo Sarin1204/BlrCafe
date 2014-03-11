@@ -86,16 +86,18 @@
             <th>Time</th>
             <th>Product</th>
             <th>Quantity</th>
+            <th>Total<span class="WebRupee">&#x20B9;</span></th>
           </tr>
         </thead>
         <tbody>
         {% if transaction_list %}
     {% for transaction in transaction_list %}
-    <tr id="transaction_{{ chip.id }}">
+    <tr id="transaction_{{ transaction.transactionid }}">
         <td><span id="transaction_{{ forloop.counter }}" class="badge">{{ forloop.counter }}</span></td>
         <td id = "transaction_{{ transaction.time }}">{{ transaction.time }}</td>    
         <td id = "transaction_{{ transaction.productid.name }}">{{ transaction.productid.name }}</td>
          <td id = "transaction_{{ transaction.quantity }}">{{ transaction.quantity }}</td>
+         <td id = "transaction_{{ transaction.totalprice }}">{{ transaction.totalprice }}</td>
        </tr>
     {% endfor %}
 {% else %}
