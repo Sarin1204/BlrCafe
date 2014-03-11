@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="shortcut icon" href="ico/favicon.ico">
+    {% load staticfiles %}
+    <link rel="shortcut icon" type="image/png" href="{% static 'Cafe/img/ugamDots.png' %}"/>
 	<style>
 	.colorclass{
 		background-color: #f2dede !important; 
@@ -17,7 +18,6 @@
     <title>Ugam-Blr Cafe</title>
 
     <!-- Bootstrap core CSS -->
-	{% load staticfiles %}
     <!-- Custom styles for this template -->
     <link href="{% static 'Cafe/css/bootstrap.css' %}" rel="stylesheet">
     <!-- Just for debugging purposes. Don't actually copy this line! -->
