@@ -67,7 +67,8 @@ def signin(request):
                     'username': checkUser.name,
                     'empid': checkUser.empid,
                     'phone': checkUser.phone,
-                    'password': checkUser.password
+                    'password': checkUser.password,
+                    'credits': checkUser.credits
                     }
         data = json.dumps(userJson)
         return HttpResponse(data, mimetype='application/json')

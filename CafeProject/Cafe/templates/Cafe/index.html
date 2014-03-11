@@ -235,6 +235,10 @@
     <script src="{% static 'Cafe/js/bootstrap.min.js' %}"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.1.38/jquery.form-validator.min.js"></script>
 <script type="text/javascript">
+if(sessionStorage.getItem("userid")!= null)
+{
+	window.location.assign("menucafe")
+}
   $(document).ready(function(){
     $('.carousel').carousel();
   });
@@ -273,6 +277,7 @@
 				    	  	sessionStorage.setItem("userid", userid);
 				    	  	sessionStorage.setItem("userphone", userphone);
 				    	  	sessionStorage.setItem("userpass", userpass);
+				    	  	sessionStorage.setItem("usercredits",0)
 				    	  	window.location.assign("menucafe")
 				    	  }
 				      
@@ -331,7 +336,8 @@
 				    	   	sessionStorage.setItem("username", data.username);
 				    	  	sessionStorage.setItem("userid", data.empid);
 				    	  	sessionStorage.setItem("userphone", data.phone);
-				    	  	sessionStorage.setItem("userpass", password); 
+				    	  	sessionStorage.setItem("userpass", data.password);
+				    	  	sessionStorage.setItem("usercredits",data.credits)
 				    	  	window.location.assign("menucafe")
 				    		 
 				      }
