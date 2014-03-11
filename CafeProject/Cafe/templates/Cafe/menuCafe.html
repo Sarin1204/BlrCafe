@@ -55,7 +55,6 @@ margin: 0 0 0 -100px;
     <link href="{% static 'Cafe/css/bootstrap.css' %}" rel="stylesheet">
 	<script src="http://cdn.webrupee.com/js" type="text/javascript"></script>
 	<link rel="stylesheet" type="text/css" href="http://cdn.webrupee.com/font">
-	<script type="text/javascript" src="lib/jquery.js"></script>
   </head>
   <body background="{% static 'Cafe/img/background.png' %}" style="background-repeat: no-repeat;">
  <!--  Error message popup code -->
@@ -106,7 +105,7 @@ margin: 0 0 0 -100px;
 </form>
 <br/>
 			</div>
-			<li style="position:relative; left:-10px;"><a href="/users/logout">Log Out</a></li>
+			<li onmouseover="" style="cursor: pointer; position:relative; left:-10px;"><a onClick="logout() ">Log Out</a></li>
               
 			  
             
@@ -349,14 +348,14 @@ margin: 0 0 0 -100px;
 </div>
 </div>
 <!-- CONFIRMING MODAL FOR CHECKOUT -->
-<div id="confirmModal" class="modal fade in bs-example-modal-sm" style="display: none;margin-top:auto;margin-bottom:auto; ">  
+<div id="logoutModal" class="modal fade in bs-example-modal-sm" style="display: none;margin-top:auto;margin-bottom:auto; ">  
 <div class="modal-header">  
 <a class="close" onclick="disappearModal()" data-dismiss="modal">x</a>  
-<h3>Are you sure ?</h3>  
+<h3>You have been logged out.<img src="{% static 'Cafe/img/ajax-loader.gif' %}"></img></h3>
 </div>  
-  <div class="modal-footer">  
+  <!-- <div class="modal-footer">  
 <input class="submit btn btn-default"  value="Yes"/>
-<a href="#" class="btn  btn-default" onclick="disappearModal()" data-dismiss="modal">Close</a>  
+<a href="#" class="btn  btn-default" onclick="disappearModal()" data-dismiss="modal">Close</a>   -->
 
 </div>
 
@@ -540,7 +539,7 @@ function productClick(product,id)
 		 
 	  });
 	  console.log("Productids==="+JSON.stringify(productIds));
-	  empid = localStorage.getItem("userid");
+	  empid = sessionStorage.getItem("userid");
 	  $.post("order",
 			    {	empid: empid,
   	  				productIds: JSON.stringify(productIds),
@@ -595,6 +594,15 @@ function productClick(product,id)
   			$("#cartHead").remove();
   		}
   		
+  }
+  
+  function logout()
+  {
+		sessionStorage.clear();
+		$("#logoutModal").css("display","block")
+		
+		setTimeout(function(){window.location.assign("index")}, 2500);
+		
   }
 </script>
   </body>

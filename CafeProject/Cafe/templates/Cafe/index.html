@@ -269,10 +269,10 @@
 				      console.log("Data: " + data + "\nStatus: " + status);
 				      if(data == "True")
 				    	  {
-				    	  	localStorage.setItem("username", username);
-				    	  	localStorage.setItem("userid", userid);
-				    	  	localStorage.setItem("userphone", userphone);
-				    	  	localStorage.setItem("userpass", userpass);
+				    	  	sessionStorage.setItem("username", username);
+				    	  	sessionStorage.setItem("userid", userid);
+				    	  	sessionStorage.setItem("userphone", userphone);
+				    	  	sessionStorage.setItem("userpass", userpass);
 				    	  	window.location.assign("menucafe")
 				    	  }
 				      
@@ -328,10 +328,10 @@
 				      {
 				    	  console.log("Inside true")
 				    	  alert("Data:"+JSON.stringify(data));
-				    	   	localStorage.setItem("username", data.username);
-				    	  	localStorage.setItem("userid", data.empid);
-				    	  	localStorage.setItem("userphone", data.phone);
-				    	  	localStorage.setItem("userpass", password); 
+				    	   	sessionStorage.setItem("username", data.username);
+				    	  	sessionStorage.setItem("userid", data.empid);
+				    	  	sessionStorage.setItem("userphone", data.phone);
+				    	  	sessionStorage.setItem("userpass", password); 
 				    	  	window.location.assign("menucafe")
 				    		 
 				      }
