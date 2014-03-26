@@ -300,6 +300,7 @@ margin: 0 0 0 -100px;
 </table>
 </div>
 </div>
+ <button onclick="validateCheckout()" class="btn btn-default" type="button">Submit</button>
 </div>
 
 </div>
@@ -330,6 +331,7 @@ margin: 0 0 0 -100px;
 </button>
 </div>
 </div>
+ <
 </div>
 <!--  MODAL FOR LOGOUT -->
 <div id="logoutModal" class="modal fade in bs-example-modal-sm" style="display: none;margin-top:auto;margin-bottom:auto; ">  
@@ -509,7 +511,8 @@ function productClick(product,id)
 	  else{
 		  /* $("#confirmModal").css("display","block"); */
 			    var confirmDiv = $('#containerDiv');
-		  		confirmDiv.addClass("topClass");
+		  		confirmDiv.addClass("topClass")
+		  		confirmDiv.css("display","block");
 		  		$("#checkoutButton").empty()
 		  		$("#checkoutButton").addClass("btn btn-success")
 		  		$("#checkoutButton").attr("onclick","confirm()")
@@ -591,6 +594,7 @@ function productClick(product,id)
 	  confirmDiv.fadeIn().animate({top: top,left:left}, {duration: 'slow', queue: false}, function() {
 	        //Animation complete.
 	    });
+	  confirmDiv.css("display","none")
 	  $("#containerModal").remove()
 	  
   }
