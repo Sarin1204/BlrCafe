@@ -144,12 +144,14 @@ margin: 0 0 0 -100px;
         <td id = "menu_photo_{{ chip.id }}"><img width=100 height=100 src="{{ chip.photo.url }}"></img></td>
         <td id = "menu_name_{{ chip.id }}">{{ chip.name }}</td>    
         <td id = "menu_price_{{ chip.id }}">{{ chip.price }}</td>
-        <td><div class="input-group">
-      <input id="menu_quantity_{{ chip.id }}" type="text" class="form-control" >
-      <span class="input-group-btn">
-        <button onclick="productClick('chip',{{ chip.id }})" class="btn btn-default" type="button"><span class="glyphicon glyphicon-plus"></span></button>
-      </span>
-    </div></td>
+        <td>
+      
+     
+        <button onclick="increaseCounter({{ chip.id }})" class="btn btn-lg" type="button"><span class="glyphicon glyphicon-plus" style="display:inline-block"></span></button>
+      <label id="menu_quantity_{{ chip.id }}" type="text" class="form-control" style="display:inline-block;width:30%">1</label>
+      <button onclick="decreaseCounter({{ chip.id }})" class="btn btn-lg" type="button" style="display:inline-block"><span class="glyphicon glyphicon-minus"></span></button>
+      
+    </td>
        </tr>
     {% endfor %}
 {% else %}
@@ -300,6 +302,7 @@ margin: 0 0 0 -100px;
 </table>
 </div>
 </div>
+ <button onclick="validateCheckout()" class="btn btn-default" type="button">Submit</button>
 </div>
 
 </div>
@@ -330,6 +333,7 @@ margin: 0 0 0 -100px;
 </button>
 </div>
 </div>
+ <
 </div>
 <!--  MODAL FOR LOGOUT -->
 <div id="logoutModal" class="modal fade in bs-example-modal-sm" style="display: none;margin-top:auto;margin-bottom:auto; ">  
@@ -509,7 +513,8 @@ function productClick(product,id)
 	  else{
 		  /* $("#confirmModal").css("display","block"); */
 			    var confirmDiv = $('#containerDiv');
-		  		confirmDiv.addClass("topClass");
+		  		confirmDiv.addClass("topClass")
+		  		confirmDiv.css("display","block");
 		  		$("#checkoutButton").empty()
 		  		$("#checkoutButton").addClass("btn btn-success")
 		  		$("#checkoutButton").attr("onclick","confirm()")
@@ -591,11 +596,23 @@ function productClick(product,id)
 	  confirmDiv.fadeIn().animate({top: top,left:left}, {duration: 'slow', queue: false}, function() {
 	        //Animation complete.
 	    });
+	  confirmDiv.css("display","none")
 	  $("#containerModal").remove()
 	  
   }
   
   // Function to remove items from the checkout cart 
+  
+  function increaseCounter(id){
+	 
+	  var valueQuantity=parseInt($("#menu_quantity_"+id).text())+1;
+	  $("#menu_quantity_"+id).text(valueQuantity);
+	 }
+	function decreaseCounter(id){
+	  
+		  var valueQuantity=parseInt($("#menu_quantity_"+id).text())-1;
+		  $("#menu_quantity_"+id).text(valueQuantity);
+	 }
   
   function removeCartItem(el){
   
