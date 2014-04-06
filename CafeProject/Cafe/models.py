@@ -10,6 +10,8 @@ class User(models.Model):
     phone = models.BigIntegerField(max_length=15)
     password = models.CharField(max_length=50)
     credits = models.IntegerField(max_length=5)
+    photo = models.ImageField(upload_to='users',blank = True)
+    
     def __str__(self):
         return self.name
     
