@@ -154,12 +154,12 @@
 <div class="container">  
 <div id="modalSignIn" class="modal fade in" style="display: none; ">  
 <div class="modal-header">  
-<a class="close" data-dismiss="modal">x</a>  
-<h3></h3>  
+<a class="close" onclick="closeModal()" data-dismiss="modal">x</a>  
+<h3 id="signInHeader"></h3>  
 </div>  
 <div class="modal-body">  
-<form id="registerForm" onsubmit="return checklogin();" accept-charset="UTF-8">
-<table>
+
+<table style="margin-right:auto; margin-left:auto">
 <tr>
 	<td id="photoTD">		
 	</td>
@@ -167,16 +167,16 @@
  <tr>
  <td>
   <label>Password </label>
-  </td><td>
-  <input id="user_pass" style="margin-bottom: 15px;" type="password" name="user_pass" size="30" />
+  </td></tr>
+  <tr><td>
+  <input id="user_pass1" style="margin-bottom: 15px;" type="password" name="user_pass" size="30" />
   </td>
  </tr>
   </table>
   <div class="modal-footer">  
-<input class="submit btn btn-success" type="submit" value="Register"/>
-<a href="#" class="btn  btn-default" data-dismiss="modal">Close</a>  
+<input class="submit btn btn-success" onclick="signin()" value="Submit"/>
+<a href="#" class="btn  btn-default" data-dismiss="modal" onclick="closeModal()">Close</a>  
 </div> 
-</form>
 
 </div>  
 </div>
@@ -192,11 +192,11 @@
     </div>
     {% else %}
     <div class="tile-content image">
-        	<img src="{% static 'Cafe/img/ugam_logo.png' %}">
+        	<img id="photo_{{ user.empid }}" src="{% static 'Cafe/img/noImage.jpg' %}">
     </div>
     {% endif %}
     <div class="tile-status">
-        <span class="name">{{ user.name }}</span>
+        <span id="name_{{ user.empid }}" class="name">{{ user.name }}</span>
     </div>
     <div class="tile-content bg-darkBlue">
     	<span style="font-size:24px; color:black">Credit:</span><br>
@@ -288,8 +288,9 @@ if(sessionStorage.getItem("userid")!= null)
   }
   function signin()
   {
-	  empid = $('#empid').val();
-	  password = $('#password').val();
+	  empid = $('#empidMetro').html();
+	  password = $('#user_pass1').val();
+	  alert("empid,pass=="+empid+","+password)
 	  var notnum = isNaN(empid)
 	 /*  alert(notnum) */
 	  if(empid.length == 0 ||  password.length == 0 || notnum == true)
@@ -343,9 +344,19 @@ if(sessionStorage.getItem("userid")!= null)
   
   function signInMetro(elem)
   {
+	  var name = $("#name_"+elem.id).html()
+	   $("#signInHeader").empty()
+	  $("#signInHeader").append("Welcome "+name)
+	  $("#signInHeader").append("<div id='empidMetro' style='display:none'>"+elem.id+"</div>")
 	  var photoURL = $("#photo_"+elem.id).attr("src");
-	  $("#photoTD").append("<img src="+photoURL+">");
+	  $("#photoTD").empty();
+	  $("#photoTD").append("<img height=200px width=200px src="+photoURL+">");
 	  $("#modalSignIn").css("display","block");
+  }
+  
+  function closeModal()
+  {
+	  $("#modalSignIn").css("display","none");
   }
   
 </script>
