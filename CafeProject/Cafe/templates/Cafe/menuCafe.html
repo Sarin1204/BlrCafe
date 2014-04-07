@@ -133,6 +133,7 @@ margin: 0 0 0 -100px;
       <th width="500">Item Name</th>
       <th width="150">Price <span class="WebRupee">&#x20B9;</span></th>
       <th width="100">Quantity</th>
+       <th></th>
     </tr>
   </thead>
   <tbody>
@@ -144,14 +145,16 @@ margin: 0 0 0 -100px;
         <td id = "menu_photo_{{ chip.id }}"><img width=100 height=100 src="{{ chip.photo.url }}"></img></td>
         <td id = "menu_name_{{ chip.id }}">{{ chip.name }}</td>    
         <td id = "menu_price_{{ chip.id }}">{{ chip.price }}</td>
-        <td>
+        <td width="16%">
       
      
-        <button onclick="increaseCounter({{ chip.id }})" class="btn btn-lg" type="button"><span class="glyphicon glyphicon-plus" style="display:inline-block"></span></button>
+        <button onclick="increaseCounter({{ chip.id }})" class="btn btn-default btn-lg" type="button"><span class="glyphicon glyphicon-plus" style="display:inline-block"></span></button>
       <label id="menu_quantity_{{ chip.id }}" type="text" class="form-control" style="display:inline-block;width:30%">1</label>
-      <button onclick="decreaseCounter({{ chip.id }})" class="btn btn-lg" type="button" style="display:inline-block"><span class="glyphicon glyphicon-minus"></span></button>
+      <button onclick="decreaseCounter({{ chip.id }})" class="btn btn-default btn-lg" type="button" style="display:inline-block"><span class="glyphicon glyphicon-minus"></span></button>
       
     </td>
+     <td> <button type="button" onclick="productClick('chip',{{ chip.id }})" class="btn btn-lg btn-default">Add</button</td>
+   
        </tr>
     {% endfor %}
 {% else %}
@@ -170,6 +173,7 @@ margin: 0 0 0 -100px;
       <th width="500">Item Name</th>
       <th width="150">Price <span class="WebRupee">&#x20B9;</span></th>
       <th width="100">Quantity</th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
@@ -181,13 +185,16 @@ margin: 0 0 0 -100px;
         <td id = "menu_photo_{{ biscuit.id }}"><img width=100 height=100 src="{{ biscuit.photo.url }}"></img></td>
         <td id="menu_name_{{ biscuit.id }}">{{ biscuit.name }}</td>
         <td id="menu_price_{{ biscuit.id }}" align="right">{{ biscuit.price }}</td>
-        <td><div class="input-group">
-      <input id="menu_quantity_{{ biscuit.id }}" type="text" class="form-control" >
-      <span class="input-group-btn">
-        <button onclick="productClick('biscuit',{{ biscuit.id }})" class="btn btn-default" type="button"><span class="glyphicon glyphicon-plus"></span></button>
-      </span>
-    </div></td>
-       </tr>
+        <td width="16%">
+      
+     
+        <button onclick="increaseCounter({{ biscuit.id }})" class="btn btn-default btn-lg" type="button"><span class="glyphicon glyphicon-plus" style="display:inline-block"></span></button>
+      <label id="menu_quantity_{{ biscuit.id }}" type="text" class="form-control" style="display:inline-block;width:30%">1</label>
+      <button onclick="decreaseCounter({{ biscuit.id }})" class="btn btn-default btn-lg" type="button" style="display:inline-block"><span class="glyphicon glyphicon-minus"></span></button>
+      
+    </td>
+     <td> <button type="button" onclick="productClick('biscuit',{{ biscuit.id }})" class="btn btn-lg btn-default">Add</button</td>
+    </tr>
     {% endfor %}
 {% else %}
     <p>No biscuits are available.</p>
@@ -205,6 +212,7 @@ margin: 0 0 0 -100px;
       <th width="500">Item Name</th>
       <th width="150">Price <span class="WebRupee">&#x20B9;</span></th>
       <th width="100">Quantity</th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
@@ -216,12 +224,16 @@ margin: 0 0 0 -100px;
         <td id = "menu_photo_{{ chocolate.id }}"><img width=100 height=100 src="{{ chocolate.photo.url }}"></img></td>
         <td id="menu_name_{{ chocolate.id }}" >{{ chocolate.name }}</td>
         <td id="menu_price_{{ chocolate.id }}" align="right">{{ chocolate.price }}</td>
-        <td><div class="input-group">
-      <input id="menu_quantity_{{ chocolate.id }}" type="text" class="form-control" >
-      <span class="input-group-btn">
-        <button onclick="productClick('chocolate',{{ chocolate.id }})" class="btn btn-default" type="button"><span class="glyphicon glyphicon-plus"></span></button>
-      </span>
-    </div></td>
+        <td width="16%">
+      
+     
+        <button onclick="increaseCounter({{ chocolate.id }})" class="btn btn-default btn-lg" type="button"><span class="glyphicon glyphicon-plus" style="display:inline-block"></span></button>
+      <label id="menu_quantity_{{ chocolate.id }}" type="text" class="form-control" style="display:inline-block;width:30%">1</label>
+      <button onclick="decreaseCounter({{ chocolate.id }})" class="btn btn-default btn-lg" type="button" style="display:inline-block"><span class="glyphicon glyphicon-minus"></span></button>
+      
+    </td>
+     <td> <button type="button" onclick="productClick('chocolate',{{ chocolate.id }})" class="btn btn-lg btn-default">Add</button</td>
+   
        </tr>
     {% endfor %}
 {% else %}
@@ -240,6 +252,7 @@ margin: 0 0 0 -100px;
       <th width="500">Item Name</th>
       <th width="150">Price <span class="WebRupee">&#x20B9;</span></th>
       <th width="100">Quantity</th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
@@ -251,12 +264,16 @@ margin: 0 0 0 -100px;
         <td id = "menu_photo_{{ heatneat.id }}"><img width=100 height=100 src="{{ heatneat.photo.url }}"></img></td>
         <td id="menu_name_{{ heatneat.id }}" >{{ heatneat.name }}</td>
         <td id="menu_price_{{ heatneat.id }}"  align="right">{{ heatneat.price }}</td>
-        <td><div class="input-group">
-      <input id="menu_quantity_{{ heatneat.id }}" type="text" class="form-control" >
-      <span class="input-group-btn">
-        <button onclick="productClick('heatneat',{{ heatneat.id }})" class="btn btn-default" type="button"><span class="glyphicon glyphicon-plus"></span></button>
-      </span>
-    </div></td>
+       <td width="16%">
+      
+     
+        <button onclick="increaseCounter({{ heatneat.id }})" class="btn btn-default btn-lg" type="button"><span class="glyphicon glyphicon-plus" style="display:inline-block"></span></button>
+      <label id="menu_quantity_{{ heatneat.id }}" type="text" class="form-control" style="display:inline-block;width:30%">1</label>
+      <button onclick="decreaseCounter({{ heatneat.id }})" class="btn btn-default btn-lg" type="button" style="display:inline-block"><span class="glyphicon glyphicon-minus"></span></button>
+      
+    </td>
+     <td> <button type="button" onclick="productClick('heatneat',{{ heatneat.id }})" class="btn btn-lg btn-default">Add</button</td>
+   
        </tr>
     {% endfor %}
 {% else %}
@@ -276,6 +293,7 @@ margin: 0 0 0 -100px;
       <th width="500">Item Name</th>
       <th width="150">Price <span class="WebRupee">&#x20B9;</span></th>
       <th width="100">Quantity</th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
@@ -287,12 +305,16 @@ margin: 0 0 0 -100px;
         <td id = "menu_photo_{{ beverage.id }}"><img width=100 height=100 src="{{ beverage.photo.url }}"></img></td>
         <td id="menu_name_{{ beverage.id }}">{{ beverage.name }}</td>
         <td id="menu_price_{{ beverage.id }}" align="right">{{ beverage.price }}</td>
-        <td><div class="input-group">
-      <input id="menu_quantity_{{ beverage.id }}" type="text" class="form-control" >
-      <span class="input-group-btn">
-        <button onclick="productClick('beverage',{{ beverage.id }})" class="btn btn-default" type="button"><span class="glyphicon glyphicon-plus"></span></button>
-      </span>
-    </div></td>
+        <td width="16%">
+      
+     
+        <button onclick="increaseCounter({{ beverage.id }})" class="btn btn-default btn-lg" type="button"><span class="glyphicon glyphicon-plus" style="display:inline-block"></span></button>
+      <label id="menu_quantity_{{ beverage.id }}" type="text" class="form-control" style="display:inline-block;width:30%">1</label>
+      <button onclick="decreaseCounter({{ beverage.id }})" class="btn btn-default btn-lg" type="button" style="display:inline-block"><span class="glyphicon glyphicon-minus"></span></button>
+      
+    </td>
+     <td> <button type="button" onclick="productClick('beverage',{{ beverage.id }})" class="btn btn-lg btn-default">Add</button</td>
+   
        </tr>
     {% endfor %}
 {% else %}
@@ -302,7 +324,7 @@ margin: 0 0 0 -100px;
 </table>
 </div>
 </div>
- <button onclick="validateCheckout()" class="btn btn-default" type="button">Submit</button>
+ <button onclick="validateCheckout()" class="btn btn-default" style="width: 100%;height: 58px;" type="button">Submit</button>
 </div>
 
 </div>
@@ -398,7 +420,7 @@ function productClick(product,id)
   {
 		console.log("product=="+product)
 		console.log("row=="+id)
-	  if($("#menu_quantity_"+id).val().length <= 0)
+	  if($("#menu_quantity_"+id).text().length <= 0)
 		  {
 		  	console.log("inside no quantity")
 		  	$("#errormessage").empty()
@@ -406,7 +428,7 @@ function productClick(product,id)
 		  	$("#modalError").modal('show')
 		  	return
 		  }
-		 productquantity = $("#menu_quantity_"+id).val()
+		 productquantity = $("#menu_quantity_"+id).text()
 		  productquantity= parseInt(productquantity)
 		  
 		  productinventory = $("#menu_inventory_"+id).text()
@@ -427,7 +449,7 @@ function productClick(product,id)
 	  productprice = $("#menu_price_"+id).text()
 	  productprice = parseInt(productprice)
 	  
-	  productquantity = $("#menu_quantity_"+id).val()
+	  productquantity = $("#menu_quantity_"+id).text()
 	  productquantity= parseInt(productquantity)
 	  
 	  productinventory = $("#menu_inventory_"+id).text()
@@ -609,9 +631,10 @@ function productClick(product,id)
 	  $("#menu_quantity_"+id).text(valueQuantity);
 	 }
 	function decreaseCounter(id){
-	  
+	  		
 		  var valueQuantity=parseInt($("#menu_quantity_"+id).text())-1;
-		  $("#menu_quantity_"+id).text(valueQuantity);
+		  if(valueQuantity>-1)
+		  	$("#menu_quantity_"+id).text(valueQuantity);
 	 }
   
   function removeCartItem(el){
