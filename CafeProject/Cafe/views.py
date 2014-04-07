@@ -10,7 +10,15 @@ import datetime
 from uuidfield import UUIDField
 # Create your views here.
 def index(request):
-    return render(request, 'Cafe/index.html')
+    users_list=[]
+    for user in User.objects.filter():
+        users_list.append(user);
+    context = RequestContext(request, {
+        'users_list': users_list
+    })
+    template = loader.get_template('Cafe/index.html')
+     
+    return HttpResponse(template.render(context))    
 
 def menu(request):
     chips_list=[]
