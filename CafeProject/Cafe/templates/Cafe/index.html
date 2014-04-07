@@ -79,8 +79,7 @@
           </div>
         </div>
 
-      </div>
-    </div>
+     
     <!-- Modal window already present user form -->
 	<div class="container">  
 <div id="modalError" class="colorclass modal fade in" style="display: none; ">  
@@ -149,14 +148,53 @@
 </form>
 
 </div>  
+</div>
+</div>
+<!-- Sign in modal Window -->
+<div class="container">  
+<div id="modalSignIn" class="modal fade in" style="display: none; ">  
+<div class="modal-header">  
+<a class="close" data-dismiss="modal">x</a>  
+<h3></h3>  
 </div>  
+<div class="modal-body">  
+<form id="registerForm" onsubmit="return checklogin();" accept-charset="UTF-8">
+<table>
+<tr>
+	<td id="photoTD">		
+	</td>
+</tr>
+ <tr>
+ <td>
+  <label>Password </label>
+  </td><td>
+  <input id="user_pass" style="margin-bottom: 15px;" type="password" name="user_pass" size="30" />
+  </td>
+ </tr>
+  </table>
+  <div class="modal-footer">  
+<input class="submit btn btn-success" type="submit" value="Register"/>
+<a href="#" class="btn  btn-default" data-dismiss="modal">Close</a>  
+</div> 
+</form>
+
+</div>  
+</div>
+</div>
+  
 <div class="metro">
 {% if users_list %}
     {% for user in users_list %}
-    <div class="tile live bg-darkBlue" data-role="live-tile" data-effect="slideLeft" style="box-shadow: 6px 6px 3px #000000;">
-   <div class="tile-content image">
-        	<img src="{{ user.photo.url }}">
+    <div id="{{ user.empid }}" onclick ="signInMetro(this)"  class="tile double live bg-darkBlue" data-role="live-tile" data-effect="slideLeft" style="box-shadow: 6px 6px 3px #000000;">
+   {% if user.photo %}
+   <div  class="tile-content image">
+        	<img id="photo_{{ user.empid }}" src="{{ user.photo.url }}">
     </div>
+    {% else %}
+    <div class="tile-content image">
+        	<img src="{% static 'Cafe/img/ugam_logo.png' %}">
+    </div>
+    {% endif %}
     <div class="tile-status">
         <span class="name">{{ user.name }}</span>
     </div>
@@ -175,9 +213,7 @@
 {% endif %}
 </div>
 </div>
-      
-    </div><!-- /.container -->
-
+    </div>
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
@@ -303,6 +339,15 @@ if(sessionStorage.getItem("userid")!= null)
 	  }
 		  
   }
+  
+  
+  function signInMetro(elem)
+  {
+	  var photoURL = $("#photo_"+elem.id).attr("src");
+	  $("#photoTD").append("<img src="+photoURL+">");
+	  $("#modalSignIn").css("display","block");
+  }
+  
 </script>
 </body>
 </html>
