@@ -85,7 +85,7 @@
 <div id="modalError" class="colorclass modal fade in" style="display: none; ">  
 <div class="modal-header">  
 <a class="close" data-dismiss="modal">x</a>  
-<h3>Registration Error</h3>
+<h3>Login Error</h3>
 <hr>  
 <label id="errormessage"></label>
 </div> 
@@ -290,14 +290,14 @@ if(sessionStorage.getItem("userid")!= null)
   {
 	  empid = $('#empidMetro').html();
 	  password = $('#user_pass1').val();
-	  alert("empid,pass=="+empid+","+password)
 	  var notnum = isNaN(empid)
 	 /*  alert(notnum) */
 	  if(empid.length == 0 ||  password.length == 0 || notnum == true)
 		  {
 		  	/* alert("inside if") */
+		  	$("#modalSignIn").css("display","none");
 		  	$("#errormessage").empty();
-  	  		$("#errormessage").append('Incorrect Sign-in. Please try again.');
+  	  		$("#errormessage").append('Please enter password');
 		  	$("#modalError").modal('show');
 		  	return false;
 		  }
@@ -312,7 +312,7 @@ if(sessionStorage.getItem("userid")!= null)
 				      if(data == "false")
 				    	  {
 				    	  	
-				    	  	$("#modalRegister").modal('hide')
+				    	  $("#modalSignIn").css("display","none");
 				    	  	$("#errormessage").empty()
 				    	  	$("#errormessage").append('Invalid Credentials. Please try again')
 				    	  	$("#modalError").modal('show')
