@@ -107,6 +107,7 @@ def order(request):
         productObject.save()
          
     return HttpResponse("True")
+
 def profile(request,userid):
     print("userid====="+userid)
     userid = int(userid)
@@ -118,9 +119,9 @@ def profile(request,userid):
         for transaction in transactionQuery:
             transactionList.append(transaction)
             
-        context = RequestContext(request, {
-        'transaction_list': transactionList
-        })
+    context = RequestContext(request, {
+    'transaction_list': transactionList
+    })
     template = loader.get_template('Cafe/profile.html')
     return HttpResponse(template.render(context))
     
